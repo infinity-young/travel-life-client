@@ -300,6 +300,7 @@ module.exports = function (webpackEnv) {
       modules: ['node_modules', paths.appNodeModules].concat(
         modules.additionalModulePaths || []
       ),
+      extensions: ['.tsx', '.ts', '.js'],
       // These are the reasonable defaults supported by the Node ecosystem.
       // We also include JSX as a common component filename extension to support
       // some tools, although we do not recommend using it, see:
@@ -346,6 +347,29 @@ module.exports = function (webpackEnv) {
           test: /\.(js|mjs|jsx|ts|tsx|css)$/,
           loader: require.resolve('source-map-loader'),
         },
+        {
+          test: /\.(ts|tsx)$/,
+          use: [
+            {
+              loader: "babel-loader",
+              options: {
+                presets: [
+                  "@babel/preset-env",
+                  "@babel/preset-react",
+                  "@babel/preset-typescript"
+                ]
+              }
+            }
+          ],
+          exclude: /node_modules/
+        },
+        // {
+        //   test: /\.(ts|tsx)$/,
+        //   exclude: /node_modules/,
+        //   use: {
+        //     loader: 'ts-loader'
+        //   }
+        // },
         {
           // "oneOf" will traverse all following loaders until one will
           // match the requirements. When no loader matches it will fall
