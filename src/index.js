@@ -2,12 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import UserPage from './page/index.tsx'
+import App from './page/index.tsx'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <UserPage />
+    <App />
   </React.StrictMode>
 );
 
