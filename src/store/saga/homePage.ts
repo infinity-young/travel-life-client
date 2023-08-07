@@ -8,7 +8,7 @@ function *getHomePageInfomation(){
     //请求首页的数据
     const data = yield call(Request,HOME_PAGE_PATH)
     //将数据写入到store
-    console.log("==mydata===="+JSON.stringify(data));
+    // console.log("==mydata===="+JSON.stringify(data));
     if(data?.data){
         yield put(yield call(setHomePageData,data.data));
     }

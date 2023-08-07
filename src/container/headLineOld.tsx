@@ -15,16 +15,21 @@ interface headLineType{
     createTime:string;
     lastEditTime:string;
 }
-export class HeadLine extends PureComponent<Props>{
+export class HeadLineOld extends PureComponent<Props>{
+    componentWillUpdate(nextProps: Readonly<Props>, nextState: Readonly<{}>, nextContext: any): void {
+        return true;
+    }
     render(): ReactNode {
+        // console.log("=pp====="+JSON.stringify(this.props))
         return(<div>
             <span>头条轮播图</span>
         </div>)
     }
 
 }
-const mapStateToProps=state=>{
+const mapStateToProps = state => {
+    // console.log("==old state===="+JSON.stringify(state))
     const {homePageReducer:{homePageData:headLineList=[]}={}}=state
-    return headLineList;
+    return {headLineList};
 }
-export default connect(mapStateToProps)(HeadLine);
+export default connect(mapStateToProps)(HeadLineOld);
