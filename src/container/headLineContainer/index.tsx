@@ -1,7 +1,8 @@
 import { PureComponent, ReactNode } from "react";
 import { connect } from "react-redux";
 import React from 'react';
-import styles from './index.scss'
+import styles from './index.module.scss'
+import { HOME_PAGE_IMAGE_PATH } from "../../config/imageConfig.ts";
 
 interface Props{
     headLineList:Array<headLineType>
@@ -27,35 +28,44 @@ export class HeadLine extends PureComponent<Props,State>{
             currentImageIndex:0
         }
     }
+    // shouldComponentUpdate(pre){
+    //     return 
+    // }
+    shouldComponentUpdate(nextProps: Readonly<Props>) {
+        return nextProps.headLineList?.length!==this.props.headLineList?.length
+    }
     componentDidMount(){
         this.interval=setInterval(()=>{
             this.setState((prevState)=>{
-                currentImageIndex:(prevState.currentImageIndex+1)%this.props.headLineList?.length;
+                return {currentImageIndex:(prevState.currentImageIndex+1)%this.props.headLineList?.length}
             })}
-        ,1000);
+        ,3000);
     }
     componentWillUnmount() {
         clearInterval(this.interval);
     }
     render(): ReactNode {
         const {headLineList}=this.props;
-        console.log("===ss==="+JSON.stringify(styles))
-        // console.log("=hh===="+JSON.stringify(headLineList))
+        console.log("==1===="+JSON.stringify(headLineList))
+        if(headLineList.length===0){
+            return null;
+        }
+        console.log("==2=="+JSON.stringify(styles))
         const{currentImageIndex}=this.state;
         return(<div className={styles.container}>
             {headLineList?.map((item,index)=>{
-                <img
-                key={index}
-                src={item.lineImg}
-                className={index===currentImageIndex?styles.active:''}
-                />
+               return  <img
+               key={index}
+               src={HOME_PAGE_IMAGE_PATH+item.lineImg}
+               className={index===currentImageIndex?styles.active:styles.hidden}
+               />
             })}
         </div>)
     }
 
 }
 const mapStateToProps = state => {
-    // console.log("== state==1=="+JSON.stringify(state))
+    console.log("=state======"+JSON.stringify(state));
     const { homePageReducer: { homePageData: { headLineList = [] } = {} } = {} } = state;
     return { headLineList };
   };
