@@ -10,11 +10,9 @@ import { initHomePage } from "../store/actions/homePage.ts";
 
 export default class App extends PureComponent{
     private reduxStore = createStoreByRootTag()
-    constructor(props){
-        super(props);
+    componentDidMount() {
         this.reduxStore.dispatch(initHomePage());
     }
-
     render(): ReactNode {
         return(
         <Provider store={this.reduxStore}>
