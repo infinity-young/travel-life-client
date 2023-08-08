@@ -28,12 +28,6 @@ export class HeadLine extends PureComponent<Props,State>{
             currentImageIndex:0
         }
     }
-    // shouldComponentUpdate(pre){
-    //     return 
-    // }
-    shouldComponentUpdate(nextProps: Readonly<Props>) {
-        return nextProps.headLineList?.length!==this.props.headLineList?.length
-    }
     componentDidMount(){
         this.interval=setInterval(()=>{
             this.setState((prevState)=>{
@@ -69,6 +63,4 @@ const mapStateToProps = state => {
     const { homePageReducer: { homePageData: { headLineList = [] } = {} } = {} } = state;
     return { headLineList };
   };
-const mapDispatchToProps=()=>{
-}
-export default connect(mapStateToProps,mapDispatchToProps)(HeadLine);
+export default connect(mapStateToProps)(HeadLine);
