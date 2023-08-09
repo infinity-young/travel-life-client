@@ -10,7 +10,7 @@ export default class HomePage extends PureComponent<props>{
        return (
         <div>
         <span> HomePage</span>
-        <HeadLine headLineList={this.props.headLineList}/>
+        <HeadLine/>
         <Link to="/next">
         <button>全部商店</button>
       </Link>

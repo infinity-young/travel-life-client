@@ -35,14 +35,25 @@ export class HeadLine extends PureComponent<Props,State>{
             })}
         ,3000);
     }
+    componentDidUpdate() {
+        return true;
+        
+    }
     componentWillUnmount() {
         clearInterval(this.interval);
     }
+    handleClick = () => {
+        // 调用 forceUpdate 函数强制更新组件
+        this.forceUpdate();
+      }
     render(): ReactNode {
         const {headLineList}=this.props;
         console.log("==1===="+JSON.stringify(headLineList))
         if(headLineList.length===0){
-            return null;
+            return ( <div>
+                <button onClick={this.handleClick}>强制更新</button>
+                <p>当前时间：{new Date().toLocaleTimeString()}</p>
+              </div>);
         }
         console.log("==2=="+JSON.stringify(styles))
         const{currentImageIndex}=this.state;

@@ -16,6 +16,7 @@ export default class App extends PureComponent{
     render(): ReactNode {
         return(
         <Provider store={this.reduxStore}>
+             {console.log('-----------',this.reduxStore.getState())}
             <Router>
                 <div>
                     <HomePage/>
