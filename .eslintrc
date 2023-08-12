@@ -12,9 +12,19 @@
     }
   },
   "rules": {
-    "no-restricted-syntax": "off"
+    "no-restricted-syntax": "off",
+    "css-modules/no-unused-class": "error",
+    "css-modules/no-undef-class": "error"
   },
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint"],
-  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"]
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+  "settings": {
+    "import/resolver": {
+      "typescript": {
+        "project": "./tsconfig.json",
+        "alwaysTryTypes": true
+      }
+    }
+  },
+  "plugins": ["@typescript-eslint", "css-modules"]
 }

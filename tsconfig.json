@@ -10,6 +10,10 @@
     "allowImportingTsExtensions": true,
     "moduleResolution": "node",
     "declaration": true,
-    "emitDeclarationOnly": true
+    "emitDeclarationOnly": true,
+    "baseUrl": "./",
+    "paths": {
+      "*": ["src/*", "typings/*"]
+    }
   }
 }

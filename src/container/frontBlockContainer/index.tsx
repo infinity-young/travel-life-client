@@ -3,6 +3,7 @@ import ShopItem, { ShopItemInterface } from "../../components/shopItem/index.tsx
 import { connect } from "react-redux";
 import React from "react";
 import styles from './index.module.scss'
+
 interface FrontBlockInterface{
     shopCategoryList:Array<ShopItemInterface>
 }
