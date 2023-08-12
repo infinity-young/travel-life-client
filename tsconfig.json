@@ -12,8 +12,15 @@
     "declaration": true,
     "emitDeclarationOnly": true,
     "baseUrl": "./",
+    "noImplicitAny": false,
     "paths": {
       "*": ["src/*", "typings/*"]
+    },
+    "rules": {
+      "no-restricted-syntax": "off",
+      "css-modules/no-unused-class": "error",
+      "css-modules/no-undef-class": "error",
+      "noImplicitAny": "off"
     }
   }
 }
