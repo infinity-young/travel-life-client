@@ -11,7 +11,7 @@ export function generateAsyncActionType(actionName: string): string[] {
 
 export function createActionTypes(
     actionConfig: IDictionary<ActionConfigType>,
-    namespace: string = ''
+    namespace = ''
 ): IDictionary<string> {
     let result: { [index: string]: string } = {};
     const prefix = namespace ? '' : `${namespace}/`;
