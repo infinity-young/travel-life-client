@@ -6,6 +6,10 @@
     "jsx": "react",
     "sourceMap": true,
     "strict": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "allowImportingTsExtensions": true,
+    "moduleResolution": "node",
+    "declaration": true,
+    "emitDeclarationOnly": true
   }
 }

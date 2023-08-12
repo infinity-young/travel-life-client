@@ -21,7 +21,7 @@ export default class App extends PureComponent{
                 <div>
                     <HomePage/>
                     <Routes>
-                        <Route exact path="/" component={HomePage} />
+                        <Route  path="/" component={HomePage} />
                         <Route path="/about" component={HomePage} />
                     </Routes>
                 </div>
