@@ -1,0 +1,20 @@
+.itemContainer {
+  display: flex;
+  flex-basis: 50%;
+  width: 50%;
+  flex-wrap: wrap;
+  flex-direction: row;
+  background-color: red;
+}
+
+.img {
+  flex-basis: 50%;
+  height: 50%;
+  width: 50%;
+  background-color: aquamarine;
+}
+
+.textContainer {
+  flex-basis: 50%;
+  background-color: purple;
+}

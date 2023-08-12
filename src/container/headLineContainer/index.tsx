@@ -5,9 +5,9 @@ import styles from './index.module.scss'
 import { HOME_PAGE_IMAGE_PATH } from "../../config/imageConfig.ts";
 
 interface Props{
-    headLineList:Array<headLineType>
+    headLineList:Array<HeadLineType>
 }
-interface headLineType{
+interface HeadLineType{
     lineId:number;
     lineName:string;
     lineLink:string;
@@ -48,14 +48,14 @@ export class HeadLine extends PureComponent<Props,State>{
       }
     render(): ReactNode {
         const {headLineList}=this.props;
-        console.log("==1===="+JSON.stringify(headLineList))
+        // console.log("==1===="+JSON.stringify(headLineList))
         if(headLineList.length===0){
             return ( <div>
                 <button onClick={this.handleClick}>强制更新</button>
                 <p>当前时间：{new Date().toLocaleTimeString()}</p>
               </div>);
         }
-        console.log("==2=="+JSON.stringify(styles))
+        // console.log("==2=="+JSON.stringify(styles))
         const{currentImageIndex}=this.state;
         return(<div className={styles.container}>
             {headLineList?.map((item,index)=>{
@@ -70,7 +70,7 @@ export class HeadLine extends PureComponent<Props,State>{
 
 }
 const mapStateToProps = state => {
-    console.log("=state======"+JSON.stringify(state));
+    // console.log("=state======"+JSON.stringify(state));
     const { homePageReducer: { homePageData: { headLineList = [] } = {} } = {} } = state;
     return { headLineList };
   };
