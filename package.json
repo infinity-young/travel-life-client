@@ -87,10 +87,9 @@
     ]
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "7.21.0-placeholder-for-preset-env.2",
     "@babel/preset-react": "^7.22.5",
     "@babel/preset-typescript": "^7.22.5",
-    "@types/react": "^18.2.18",
+    "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
     "@types/webpack-env": "^1.18.1",
     "babel-preset-react-app": "^10.0.1",
@@ -155,7 +154,34 @@
   "babel": {
     "presets": [
       "react-app",
+      [
+        "@babel/preset-env",
+        {
+          "useBuiltIns": "usage",
+          "corejs": 3
+        }
+      ],
       "@babel/preset-react"
+    ],
+    "plugins": [
+      [
+        "@babel/plugin-transform-class-properties",
+        {
+          "loose": true
+        }
+      ],
+      [
+        "@babel/plugin-transform-private-methods",
+        {
+          "loose": true
+        }
+      ],
+      [
+        "@babel/plugin-transform-private-property-in-object",
+        {
+          "loose": true
+        }
+      ]
     ]
   }
 }
