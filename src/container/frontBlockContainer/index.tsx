@@ -15,13 +15,13 @@ export  class FrontBlock extends PureComponent<FrontBlockInterface>{
           // do something with the updated shopCategoryList
         }
       }
+      
     render(): ReactNode {
         const {shopCategoryList}=this.props;
+
         console.log('====shopCategoryList===='+JSON.stringify(shopCategoryList));
         if(shopCategoryList?.length===0){
-            return ( <div>
-                <p>当前时间：{new Date().toLocaleTimeString()}</p>
-              </div>);
+            return ( <div/>);
         }
         return <div className={styles.container}>
             {shopCategoryList?.map((item,index)=>{

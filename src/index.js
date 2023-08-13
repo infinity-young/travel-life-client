@@ -4,13 +4,25 @@ import reportWebVitals from './reportWebVitals';
 import createStoreByRootTag from '../src/store/index.ts';
 import { Provider } from 'react-redux'
 import App from './page/index.tsx'
+import ShopListPageWapper from './page/shopListPage';
+import HomePage from './page/homPage';
+import { BrowserRouter as Router,Switch, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const reduxStore = createStoreByRootTag()
 root.render(
   <React.StrictMode>
     <Provider store={reduxStore}>
-      <App />
+    <Router>
+      <Link to="/shoplistpage">Go to Shop List Page1</Link>
+      <Switch>
+          <Route exact path="/" component={App} />
+          <Route exact path="/shoplistpage/:parentId" component={ShopListPageWapper} />
+        </Switch>
+      </Router>
     </Provider>
   </React.StrictMode>
 );

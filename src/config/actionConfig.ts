@@ -10,8 +10,11 @@ export const HomePageTypes = createActionTypes(
 
 export const ShopListPageTypes = createActionTypes(
     {
-        GET_SHOP_LIST_PAGE_REQUEST: null,
-        SET_SHOP_LIST_PAGE_REQUEST_DATA:null
+        GET_SHOP_LIST_PAGE_FILTER_REQUEST: null,
+        SET_SHOP_LIST_PAGE_FILTER_REQUEST_DATA:null,
+        GET_SHOP_LIST_PAGE_LIST_REQUEST: null,
+        SET_SHOP_LIST_PAGE_LIST_REQUEST_DATA:null,
+        INIT_SHOP_LIST_PAGE:null
     },
     'shoplistpage'
 );
