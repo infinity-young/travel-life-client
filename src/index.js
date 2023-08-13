@@ -1,12 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
+import createStoreByRootTag from '../src/store/index.ts';
+import { Provider } from 'react-redux'
 import App from './page/index.tsx'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+const reduxStore = createStoreByRootTag()
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={reduxStore}>
+      <App />
+    </Provider>
   </React.StrictMode>
 );
 

@@ -1,22 +1,21 @@
 import React from "react";
 import { PureComponent, ReactNode } from "react";
-import { Provider } from 'react-redux'
 import HomePage from "./homPage.tsx";
-import createStoreByRootTag from "../store/index.ts";
 import { BrowserRouter as Router, Route, Link,Routes } from 'react-router-dom';
+import { connect } from "react-redux";
 import { initHomePage } from "../store/actions/homePage.ts";
 
 
-
-export default class App extends PureComponent{
-    private reduxStore = createStoreByRootTag()
-    componentDidMount() {
-        this.reduxStore.dispatch(initHomePage());
+interface Props{
+    initHomePage:()=>void;
+}
+export class App extends PureComponent<Props>{
+    constructor(props){
+        super(props);
+        this.props.initHomePage()
     }
     render(): ReactNode {
         return(
-        <Provider store={this.reduxStore}>
-             {console.log('-----------',this.reduxStore.getState())}
             <Router>
                 <div>
                     <HomePage/>
@@ -25,7 +24,12 @@ export default class App extends PureComponent{
                         <Route path="/about" component={HomePage} />
                     </Routes>
                 </div>
-            </Router>
-        </Provider>)
+            </Router>)
     }
 }
+const mapDispatchToProps=(dispatch)=>{
+    return{
+        initHomePage:()=>dispatch(initHomePage())
+    }
+}
+export default connect(null,mapDispatchToProps)(App)
