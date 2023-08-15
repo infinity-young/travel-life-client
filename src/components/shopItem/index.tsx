@@ -2,17 +2,7 @@ import { PureComponent, ReactNode } from "react";
 import { HOME_PAGE_IMAGE_PATH } from "../../config/imageConfig.ts";
 import styles from './index.module.scss'
 import React from "react";
-
-export interface ShopItemInterface{
-    shopCategoryId:number;
-    shopCategoryName:string;
-    shopCategoryDesc:string;
-    shopCategoryImg:string;
-    priority:number;
-    createTime:string;
-    lastEditTime:string;
-    parent:number;
-}
+import { ShopItemInterface } from "interface/shopInterface.ts";
 
 export default class ShopItem extends PureComponent<ShopItemInterface>{
     constructor(props:ShopItemInterface){

@@ -3,9 +3,16 @@ import React from "react";
 import { withRouter, RouteProps } from 'react-router-dom';
 import { connect, ConnectedProps } from 'react-redux';
 import { initShopListPage } from "../store/actions/shopListPage.ts";
+import SearchBox from "../components/searchBox/index.tsx";
+import { AreaItem, ShopItemInterface } from "interface/shopInterface.ts";
+import AreaSelectBox from "../components/areaSelectBox/index.tsx";
+import Category from "../components/category/index.tsx";
+import { categoryItem } from "interface/commonInterface.ts";
 
 interface  ShopListPageProps{
     initShopListPage:(parentId:number)=>void;
+    shopCategoryList:Array<ShopItemInterface>;
+    areaList:Array<AreaItem>;
 }
 
 type Props = RouteProps<string> & PropsFromRedux&ShopListPageProps;
@@ -17,12 +24,36 @@ export  class ShopListPage extends PureComponent<RouteProps&Props>{
         const { parentId } = this.props.match.params;
         this.props.initShopListPage(parentId)
     }
+    dealWithShopCategoryList=( shopCategoryList:Array<ShopItemInterface>)=>{
+        if(shopCategoryList?.length===0){
+            return []
+        }
+        const categoryList=shopCategoryList.map((item:ShopItemInterface)=>{
+            const newItem:categoryItem={
+                categoryId:item.shopCategoryId,
+                categoryName:item.shopCategoryName
+            }
+            return newItem
+        })
+        return categoryList
+    }
+    onClickCategory=(categoryId:number)=>{
+        console.log('=====selectCategoryId is:===',categoryId);
+    }
+    onSelectCity=(areaId:number)=>{
+        console.log('======areaId=====',areaId)
+    }
     render(){
         const { parentId } = this.props.match.params;
+        const {shopCategoryList=[],areaList=[]}=this.props;
+        const categoryList=this.dealWithShopCategoryList(shopCategoryList);
         console.log('===parentIdpp==',parentId)
         console.log("======dfdfd====="+JSON.stringify(this.props))
        return(
         <div>
+            <SearchBox/>
+            <Category categoryList={categoryList} onClickCategory={this.onClickCategory}/>
+            <AreaSelectBox areaList={areaList} onSelectCity={this.onSelectCity}/>
             <span> list1</span>
         </div>
        )
@@ -31,8 +62,9 @@ export  class ShopListPage extends PureComponent<RouteProps&Props>{
 
 const mapStateToProps = state => {
     console.log('===shoplist===state======'+JSON.stringify(state));
+    const {shopListPageReducer:{shopListPageData:{filterData:{shopCategoryList,areaList}}}}=state;
     return {
-        data: state.data
+        shopCategoryList,areaList
       }
 };
 const mapDispatchToProps=dispatch=>{
