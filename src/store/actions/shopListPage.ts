@@ -2,9 +2,10 @@ import { ShopListPageTypes } from "../../config/actionConfig.ts";
 
 
 
-export function initShopListPage(){
+export function initShopListPage(payload){
    return {
-    type:ShopListPageTypes.INIT_SHOP_LIST_PAGE
+    type:ShopListPageTypes.INIT_SHOP_LIST_PAGE,
+    payload
    }
 }
 export function getShopListPageFilterData(payload){
