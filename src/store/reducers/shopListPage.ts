@@ -10,22 +10,18 @@ const defaultStates = {
 
 const cases = {
     [ShopListPageTypes.SET_SHOP_LIST_PAGE_FILTER_REQUEST_DATA]:(state,payload)=>{
-        console.log("==list==origin state=="+JSON.stringify(state))
-        // console.log("=homepagereducer==={...state,homePageData:{...payload}}="+JSON.stringify({...state,homePageData:{...payload}}))
-        const newFilterData={
-            ...state.filterData,
+        const newShopListPageData={
+            ...state.shopListPageData,
             filterData:{...payload}
         }
-        return {...state,shopListPageData:newFilterData}
+        return {...state,shopListPageData:{...newShopListPageData}}
     },
     [ShopListPageTypes.SET_SHOP_LIST_PAGE_LIST_REQUEST_DATA]:(state,payload)=>{
-        console.log("==list==origin state=="+JSON.stringify(state))
-        // console.log("=homepagereducer==={...state,homePageData:{...payload}}="+JSON.stringify({...state,homePageData:{...payload}}))
-        const newFilterData={
-            ...state.filterData,
+        const newShopListPageData={
+            ...state.shopListPageData,
             listData:{...payload}
         }
-        return {...state,shopListPageData:{...newFilterData}}
+        return {...state,shopListPageData:{...newShopListPageData}}
     }
    
 };
