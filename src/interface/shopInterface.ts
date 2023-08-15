@@ -1,4 +1,4 @@
-export interface ShopItemInterface{
+export interface ShopCategoryItemInterface{
     shopCategoryId:number;
     shopCategoryName:string;
     shopCategoryDesc:string;
@@ -15,4 +15,21 @@ export interface AreaItem{
     priority: number,
     createTime: string,
     lastEditTime: string
+}
+
+export interface ShopItemInterface{
+    shopId:number;
+    shopName:string;
+    shopAddr:string;
+    shopDesc:string;
+    phone:string;
+    shopImg:string;
+    priority:number;
+    createTime:string;
+    lastEditTime:string;
+    enableStatus:number;
+    advice:string;
+    area:AreaItem;
+    owner:string;
+    shopCategory:ShopCategoryItemInterface
 }

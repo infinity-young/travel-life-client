@@ -1,11 +1,11 @@
 import { PureComponent, ReactNode } from "react";
-import ShopItem, { ShopItemInterface } from "../../components/shopItem/index.tsx";
+import ShopItem, { ShopCategoryItemInterface } from "../../components/shopItem/index.tsx";
 import { connect } from "react-redux";
 import React from "react";
 import styles from './index.module.scss'
 
 interface FrontBlockInterface{
-    shopCategoryList:Array<ShopItemInterface>
+    shopCategoryList:Array<ShopCategoryItemInterface>
 }
 export  class FrontBlock extends PureComponent<FrontBlockInterface>{
     componentDidUpdate(prevProps) {
@@ -15,11 +15,11 @@ export  class FrontBlock extends PureComponent<FrontBlockInterface>{
           // do something with the updated shopCategoryList
         }
       }
-      
+
     render(): ReactNode {
         const {shopCategoryList}=this.props;
 
-        console.log('====shopCategoryList===='+JSON.stringify(shopCategoryList));
+        // console.log('====shopCategoryList===='+JSON.stringify(shopCategoryList));
         if(shopCategoryList?.length===0){
             return ( <div/>);
         }
@@ -34,7 +34,7 @@ export  class FrontBlock extends PureComponent<FrontBlockInterface>{
 
 }
 const mapStateToProps=(state)=>{ 
-    console.log('======'+JSON.stringify(state)) 
+    // console.log('======'+JSON.stringify(state)) 
 
     const { homePageReducer: { homePageData: { shopCategoryList = [] } = {} } = {} } = state; 
     console.log("====shopCategoryList=="+JSON.stringify(shopCategoryList));
