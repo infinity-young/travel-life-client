@@ -15,11 +15,15 @@ class ShopList extends PureComponent<Props>{
             const newItem:CellItem={
                 title:item.shopName,
                 desc:item.shopDesc,
-                img:SHOP_LIST_PAGE_IMAGE_PATH+item.shopImg
+                img:SHOP_LIST_PAGE_IMAGE_PATH+item.shopImg,
+                id:item.shopId
             }
             return newItem;
         })
         return newListData;
+    }
+    onCellClick=(id:number)=>{
+        //
     }
     render(): ReactNode {
         const {shopList=[]}=this.props;
@@ -32,7 +36,14 @@ class ShopList extends PureComponent<Props>{
             <div>
                 <span>list</span>
                 {newListData.map((item,index)=>{
-                    return <PoiCell title={item.title} desc={item.desc} img={item.img} key={index}/>
+                    return <PoiCell 
+                    title={item.title} 
+                    desc={item.desc} 
+                    img={item.img} 
+                    id={item.id}
+                    key={index}
+                    onClickPoi={this.onCellClick}
+                    />
                 })}
             </div>
         )

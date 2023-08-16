@@ -2,11 +2,14 @@ import { CellItem } from "interface/commonInterface";
 import { PureComponent, ReactNode } from "react";
 import React from 'react'
 
-export default class PoiCell extends PureComponent<CellItem>{
+interface Props extends CellItem{
+  onClickPoi:(id:number)=>void;
+}
+export default class PoiCell extends PureComponent<Props>{
 render(): ReactNode {
-    const{title,desc,img}=this.props;
+    const{title,desc,img,id,onClickPoi}=this.props;
     return (
-        <div>
+        <div onClick={()=>onClickPoi(id)}>
             <img
             src={img}
             />

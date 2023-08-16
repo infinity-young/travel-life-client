@@ -70,8 +70,7 @@ export class HeadLine extends PureComponent<Props,State>{
 
 }
 const mapStateToProps = state => {
-    // console.log("=state======"+JSON.stringify(state));
-    
+    // console.log("=state======"+JSON.stringify(state)); 
     const { homePageReducer: { homePageData: { headLineList = [] } = {} } = {} } = state;
     return { headLineList };
   };

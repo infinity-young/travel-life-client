@@ -3,7 +3,8 @@ import { createActionTypes } from "../utils/common.ts";
 export const HomePageTypes = createActionTypes(
     {
         GET_HOME_PAGE_REQUEST: null,
-        SET_HOME_PAGE_REQUEST_DATA:null
+        SET_HOME_PAGE_REQUEST_DATA:null,
+        INIT_HOME_PAGE:null
     },
     'hompage'
 );

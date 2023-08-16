@@ -23,7 +23,6 @@ const cases = {
         }
         return {...state,shopListPageData:{...newShopListPageData}}
     }
-   
 };
 
 export default createReducer(cases, defaultStates);

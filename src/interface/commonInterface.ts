@@ -7,4 +7,5 @@ export interface CellItem{
     title:string;
     desc:string;
     img:string;
+    id:number;
 }

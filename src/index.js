@@ -3,11 +3,12 @@ import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 import createStoreByRootTag from '../src/store/index.ts';
 import { Provider } from 'react-redux'
-import App from './page/index.tsx'
 import ShopListPageWapper from './page/shopListPage';
 import HomePage from './page/homPage';
 import { BrowserRouter as Router,Switch, Route } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import ShopPage from '../src/page/shopPage.tsx';
+import GoodsDetailPage from '../src/page/goodsDetailPage.tsx';
 
 
 
@@ -17,10 +18,12 @@ root.render(
   <React.StrictMode>
     <Provider store={reduxStore}>
     <Router>
-      <Link to="/shoplistpage">Go to Shop List Page1</Link>
-      <Switch>
-          <Route exact path="/" component={App} />
-          <Route exact path="/shoplistpage/:parentId" component={ShopListPageWapper} />
+      <Link to="/goodsdetailpage">Go to Shop List Page1</Link>
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route exact path="/shoplistpage/:parentId?" component={ShopListPageWapper} />
+          <Route exact path='/shoppage/:shopId?' component={ShopPage}/>
+          <Route exact path='/goodsdetailpage/:productId?' component={GoodsDetailPage}/>
         </Switch>
       </Router>
     </Provider>

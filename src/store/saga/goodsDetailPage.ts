@@ -9,7 +9,6 @@ interface GoodsDetailParam{
 }
 function *initGoodsDetail(){
     //将跳链需带入数据 todo
-    
     //请求goodsDetail的数据
     const goodsDetailParam:GoodsDetailParam={
         productId:10

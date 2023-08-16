@@ -26,7 +26,7 @@ export  class ShopListPage extends PureComponent<RouteProps&Props>{
         this.props.initShopListPage(parentId)
     }
     dealWithShopCategoryList=( shopCategoryList:Array<ShopCategoryItemInterface>)=>{
-        if(shopCategoryList?.length===0){
+        if(shopCategoryList===null||shopCategoryList?.length===0){
             return []
         }
         const categoryList=shopCategoryList.map((item:ShopCategoryItemInterface)=>{
@@ -45,6 +45,7 @@ export  class ShopListPage extends PureComponent<RouteProps&Props>{
         // console.log('======areaId=====',areaId)
     }
     render(){
+        console.log('====pp======'+JSON.stringify(this.props));
         const { parentId } = this.props.match.params;
         const {shopCategoryList=[],areaList=[]}=this.props;
         const categoryList=this.dealWithShopCategoryList(shopCategoryList);

@@ -2,11 +2,11 @@ import { PureComponent, ReactNode } from "react";
 import React from 'react'
 import { connect } from "react-redux";
 
-export class  ShopPage extends PureComponent{
+export class GoodsDetailPage extends PureComponent{
     render(): ReactNode {
-        return(
+        return (
             <div>
-                <span>shop page</span>
+                <span>goods detail page</span>
             </div>
         )
     }
@@ -19,4 +19,4 @@ const mapDispatchToProps=(dispatch)=>{
     return{}
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(ShopPage)
+export default connect(mapStateToProps,mapDispatchToProps)(GoodsDetailPage)
