@@ -27,7 +27,7 @@ class ShopList extends PureComponent<Props>{
             return <div/>
         }
         const newListData=this.dealListData(shopList);
-        console.log('===newListData====='+JSON.stringify(newListData));
+        // console.log('===newListData====='+JSON.stringify(newListData));
         return (
             <div>
                 <span>list</span>

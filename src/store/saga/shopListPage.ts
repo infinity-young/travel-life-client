@@ -1,5 +1,5 @@
 import { all, call, put, takeEvery } from 'redux-saga/effects'
-import { SHOP_LIST_PAGE_FILTER, SHOP_LIST_PAGE_LIST } from '../../config/requestConfig.ts'
+import { SHOP_LIST_PAGE_FILTER_PATH, SHOP_LIST_PAGE_LIST_PATH } from '../../config/requestConfig.ts'
 import {Request} from '../../request/index.ts'
 import { ShopListPageTypes } from '../../config/actionConfig.ts';
 import { getShopListPageFilterData, getShopListPageListData, setShopListPageFilterData,setShopListPageListData } from '../actions/shopListPage.ts';
@@ -35,7 +35,7 @@ function *initShopListPage(action){
 function *fetchShopListPageListData(action){
     const {listParams }=action?.payload||{};
      //请求店铺列表页筛选框数据
-     const data = yield call(Request,SHOP_LIST_PAGE_LIST,listParams);
+     const data = yield call(Request,SHOP_LIST_PAGE_LIST_PATH,listParams);
      //将店铺列表页筛选框数据写入到store
      if(data?.data){
          yield put(yield call(setShopListPageListData,data.data));
@@ -45,7 +45,7 @@ function *fetchShopListPageListData(action){
 function *fetchShopListPageFilterData(action){
     const{filterParams}=action?.payload||{};
      //请求店铺列表页筛选框数据
-     const data = yield call(Request,SHOP_LIST_PAGE_FILTER,filterParams)
+     const data = yield call(Request,SHOP_LIST_PAGE_FILTER_PATH,filterParams)
      //将店铺列表页筛选框数据写入到store
      if(data?.data){
          yield put(yield call(setShopListPageFilterData,data.data));

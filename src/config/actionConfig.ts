@@ -21,15 +21,19 @@ export const ShopListPageTypes = createActionTypes(
 
 export const ShopPageTypes = createActionTypes(
     {
-        GET_SHOP_PAGE_REQUEST: null,
-        SET_SHOP_PAGE_REQUEST_DATA:null
+        GET_SHOP_PAGE_INFO_REQUEST: null,
+        SET_SHOP_PAGE_INFO_REQUEST_DATA:null,
+        GET_SHOP_PAGE_LIST:null,
+        SET_SHOP_PAGE_LIST:null,
+        INIT_SHOP_PAGE:null
     },
     'shoppage'
 );
-export const ShopDetailPageTypes = createActionTypes(
-    {
-        GET_SHOP_DETAIL_PAGE_REQUEST: null,
-        SET_SHOP_DETAIL_PAGE_REQUEST_DATA:null
+export const GoodsDetailPageTypes = createActionTypes(
+    {   
+        INIT_GOODS_DETAIL:null,
+        GET_GOODS_DETAIL_PAGE_REQUEST: null,
+        SET_GOODS_DETAIL_PAGE_REQUEST_DATA:null
     },
-    'shopdetailpage'
+    'goodsdetailpage'
 );
