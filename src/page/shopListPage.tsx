@@ -2,7 +2,7 @@ import { PureComponent } from "react";
 import React from "react";
 import { withRouter, RouteProps } from 'react-router-dom';
 import { connect, ConnectedProps } from 'react-redux';
-import { initShopListPage } from "../store/actions/shopListPage.ts";
+import { getShopListPageListData, initShopListPage, setShopListAreaId, setShopListParentId } from "../store/actions/shopListPage.ts";
 import SearchBox from "../components/searchBox/index.tsx";
 import { AreaItem, ShopCategoryItemInterface } from "interface/shopInterface.ts";
 import AreaSelectBox from "../components/areaSelectBox/index.tsx";
@@ -14,6 +14,9 @@ interface  ShopListPageProps{
     initShopListPage:(parentId:number)=>void;
     shopCategoryList:Array<ShopCategoryItemInterface>;
     areaList:Array<AreaItem>;
+    refreshList:(params?)=>void;
+    setParentId:(params)=>void;
+    setCityId:(params)=>void;
 }
 
 type Props = RouteProps<string> & PropsFromRedux&ShopListPageProps;
@@ -39,21 +42,31 @@ export  class ShopListPage extends PureComponent<RouteProps&Props>{
         return categoryList
     }
     onClickCategory=(categoryId:number)=>{
+        this.props.setParentId({parentId:categoryId})
+        this.props.refreshList()
         // console.log('=====selectCategoryId is:===',categoryId);
     }
     onSelectCity=(areaId:number)=>{
+        this.props.setCityId({areaId:areaId})
+        this.props.refreshList()
         // console.log('======areaId=====',areaId)
     }
+    onKeywordSearch=(searchValue:string)=>{
+        //console.log('===123======'+JSON.stringify(searchValue))
+        this.props.refreshList({listParams:{shopName:searchValue}})
+    }
     render(){
-        console.log('====pp======'+JSON.stringify(this.props));
-        const { parentId } = this.props.match.params;
+        // console.log('====pp======'+JSON.stringify(this.props));
         const {shopCategoryList=[],areaList=[]}=this.props;
         const categoryList=this.dealWithShopCategoryList(shopCategoryList);
         // console.log('===parentIdpp==',parentId)
         // console.log("======dfdfd====="+JSON.stringify(this.props))
+        //todo 输入搜索词查询
+        //todo 点击类别查询
+        //todo 选择城市查询
        return(
         <div>
-            <SearchBox/>
+            <SearchBox search={this.onKeywordSearch}/>
             <Category categoryList={categoryList} onClickCategory={this.onClickCategory}/>
             <AreaSelectBox areaList={areaList} onSelectCity={this.onSelectCity}/>
             <ShopList/>
@@ -75,7 +88,11 @@ const mapDispatchToProps=dispatch=>{
         initShopListPage:(parentId)=>{
             const listParams={parentId:parentId}
             dispatch(initShopListPage(listParams));
-        }    }
+        },
+        setParentId:(params)=>{dispatch(setShopListParentId(params))},
+        setCityId:(params)=>{dispatch(setShopListAreaId(params))},
+        refreshList:(params?)=>{dispatch(getShopListPageListData(params))} 
+    }
 }
   
   const connector = connect(mapStateToProps);

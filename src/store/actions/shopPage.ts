@@ -31,3 +31,9 @@ export function setShopPageList(payload){
         payload
     }
 }
+export function updateshopPageIndex(payload){
+    return{
+        type:ShopPageTypes.UPDATE_PAGE_INDEX,
+        payload
+    }
+}

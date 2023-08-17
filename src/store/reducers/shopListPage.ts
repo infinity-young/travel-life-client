@@ -4,7 +4,11 @@ import { createReducer } from "../../utils/common.ts";
 const defaultStates = {
    shopListPageData:{
     filterData:{},
-    listData:{}
+    listData:{},
+    listRequestParam:{
+        pageIndex:1,
+        pageSize:3,
+    }
    }
 };
 
@@ -22,6 +26,44 @@ const cases = {
             listData:{...payload}
         }
         return {...state,shopListPageData:{...newShopListPageData}}
+    },
+    [ShopListPageTypes.UPDATE_PAGE_INDEX]:(state,payload)=>{
+        const newShopListPageData={
+            ...state.shopListPageData,
+            listRequestParam:{
+                ...state.shopListPageData.listRequestParam,
+                ...payload
+            }
+        }
+        return{
+            ...state, shopListPageData:{...newShopListPageData}
+        }
+    },
+    [ShopListPageTypes.SET_PARENT_ID]:(state,payload)=>{
+        // console.log('==1===='+JSON.stringify(payload))
+        const newShopListPageData={
+            ...state.shopListPageData,
+            listRequestParam:{
+                ...state.shopListPageData.listRequestParam,
+                ...payload
+            }
+        }
+        // console.log('====2==='+JSON.stringify(newShopListPageData))
+        return{
+            ...state, shopListPageData:{...newShopListPageData}
+        }
+    },
+    [ShopListPageTypes.SET_AREA_ID]:(state,payload)=>{
+        const newShopListPageData={
+            ...state.shopListPageData,
+            listRequestParam:{
+                ...state.shopListPageData.listRequestParam,
+                ...payload
+            }
+        }
+        return{
+            ...state, shopListPageData:{...newShopListPageData}
+        }
     }
 };
 

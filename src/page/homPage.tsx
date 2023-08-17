@@ -21,7 +21,7 @@ export  class HomePage extends PureComponent<Props>{
         <div>
         <span> HomePage</span>
         <HeadLine/>
-          <Link to={{ pathname: '/shoplistpage/1' }}>
+          <Link to={{ pathname: '/shoplistpage' }}>
             <button>全部商店</button>
           </Link>
         <FrontBlockContainer/>
