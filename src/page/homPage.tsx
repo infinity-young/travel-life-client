@@ -19,7 +19,6 @@ export  class HomePage extends PureComponent<RouteProps&Props>{
   }
   goToShopListpage=(parentId?:number)=>{
     //点击全部按钮和底部button，跳转到店铺列表页
-    console.log('=====pp====',parentId);
     if(parentId){
       this.props.history.push(`/shoplistpage/${parentId}`);
     }else{
@@ -31,7 +30,7 @@ export  class HomePage extends PureComponent<RouteProps&Props>{
         <div>
         <span> HomePage</span>
         <HeadLine/>
-        <button onClick={()=>this.goToShopListpage(1)}>全部商店</button>
+        <button onClick={()=>this.goToShopListpage()}>全部商店</button>
         <FrontBlockContainer onItemClick={this.goToShopListpage}/>
         </div>
        )

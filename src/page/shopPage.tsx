@@ -57,7 +57,7 @@ export class  ShopPage extends PureComponent<Props>{
         return(
             <div>
                 <NavigationBar title={shopName}/>
-]                <div>
+               <div>
                     <img src={IMAGE_PATH+shopImg}/>
                     <span>{shopDesc}</span>
                     <span>{shopAddr}</span>
