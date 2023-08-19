@@ -33,3 +33,20 @@ export interface ShopItemInterface{
     owner:string;
     shopCategory:ShopCategoryItemInterface
 }
+
+export interface ShopInfoInterface{
+    shopId: number,
+	shopName: string,
+	shopAddr: string,
+	shopDesc: string,
+	phone: string,
+	shopImg: string,
+	priority: number,
+	createTime: number,
+	lastEditTime: number,
+    enableStatus: number,
+	advice: string,
+    area:AreaItem,
+    owner:number,
+    shopCategory:ShopCategoryItemInterface
+}

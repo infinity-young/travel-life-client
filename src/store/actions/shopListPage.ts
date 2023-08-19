@@ -32,12 +32,6 @@ export function setShopListPageListData(payload){
         payload
     }
 }
-export function updateShopListPageIndex(payload){
-    return{
-        type:ShopListPageTypes.UPDATE_PAGE_INDEX,
-        payload
-    }
-}
 
 export function setShopListParentId(payload){
     return{

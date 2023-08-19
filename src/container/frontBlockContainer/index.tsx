@@ -37,7 +37,7 @@ const mapStateToProps=(state)=>{
     // console.log('======'+JSON.stringify(state)) 
 
     const { homePageReducer: { homePageData: { shopCategoryList = [] } = {} } = {} } = state; 
-    console.log("====shopCategoryList=="+JSON.stringify(shopCategoryList));
+    // console.log("====shopCategoryList=="+JSON.stringify(shopCategoryList));
     return { shopCategoryList };
 }
 

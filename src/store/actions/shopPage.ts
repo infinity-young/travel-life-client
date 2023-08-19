@@ -1,8 +1,10 @@
 import { ShopPageTypes } from "../../config/actionConfig.ts";
 
-export function initShopPage(){
+export function initShopPage(payload){
+    // console.log('=====init=====')
    return {
-    type:ShopPageTypes.INIT_SHOP_PAGE
+    type:ShopPageTypes.INIT_SHOP_PAGE,
+    payload
    }
 }
 
@@ -19,7 +21,7 @@ export function setShopPageInfo(payload){
     }
 
 }
-export function getShopPageList(payload){
+export function getShopPageList(payload?){
     return{
         type:ShopPageTypes.GET_SHOP_PAGE_LIST,
         payload
@@ -31,9 +33,9 @@ export function setShopPageList(payload){
         payload
     }
 }
-export function updateshopPageIndex(payload){
+export function setShopId(payload){
     return{
-        type:ShopPageTypes.UPDATE_PAGE_INDEX,
+        type:ShopPageTypes.SET_SHOP_ID,
         payload
     }
 }

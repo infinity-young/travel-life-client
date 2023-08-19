@@ -27,18 +27,18 @@ const cases = {
         }
         return {...state,shopListPageData:{...newShopListPageData}}
     },
-    [ShopListPageTypes.UPDATE_PAGE_INDEX]:(state,payload)=>{
-        const newShopListPageData={
-            ...state.shopListPageData,
-            listRequestParam:{
-                ...state.shopListPageData.listRequestParam,
-                ...payload
-            }
-        }
-        return{
-            ...state, shopListPageData:{...newShopListPageData}
-        }
-    },
+    // [ShopListPageTypes.UPDATE_PAGE_INDEX]:(state,payload)=>{
+    //     const newShopListPageData={
+    //         ...state.shopListPageData,
+    //         listRequestParam:{
+    //             ...state.shopListPageData.listRequestParam,
+    //             ...payload
+    //         }
+    //     }
+    //     return{
+    //         ...state, shopListPageData:{...newShopListPageData}
+    //     }
+    // },
     [ShopListPageTypes.SET_PARENT_ID]:(state,payload)=>{
         // console.log('==1===='+JSON.stringify(payload))
         const newShopListPageData={

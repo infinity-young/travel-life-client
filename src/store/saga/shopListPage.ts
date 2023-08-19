@@ -3,7 +3,7 @@ import { SHOP_LIST_PAGE_FILTER_PATH, SHOP_LIST_PAGE_LIST_PATH } from '../../conf
 import {Request} from '../../request/index.ts'
 import { ShopListPageTypes } from '../../config/actionConfig.ts';
 import { select } from 'redux-saga/effects';
-import { getShopListPageFilterData, getShopListPageListData, setShopListPageFilterData,setShopListPageListData, setShopListParentId, updateShopListPageIndex } from '../actions/shopListPage.ts';
+import { getShopListPageFilterData, getShopListPageListData, setShopListPageFilterData,setShopListPageListData, setShopListParentId } from '../actions/shopListPage.ts';
 interface FilterParamsType{
     parentId?:number;
 }
@@ -28,10 +28,6 @@ function *initShopListPage(action){
 function *fetchShopListPageListData(action){
     const {listParams }=action?.payload||{};
     const {isLoadMore=false}=action?.payload||{};
-    // if(isLoadMore){
-    //     const pageIndex = yield select(state => state.shopListPageReducer.shopListPageData.listRequestParam.pageIndex);
-    //     yield put(yield call(updateShopListPageIndex,{pageIndex:pageIndex+1}))
-    // }
     const listRequestParam = yield select(state => state.shopListPageReducer.shopListPageData.listRequestParam);
     const requestParams:ListParamsType={
         ...listRequestParam,
@@ -39,7 +35,7 @@ function *fetchShopListPageListData(action){
     }
      //请求店铺列表页筛选框数据
      const data = yield call(Request,SHOP_LIST_PAGE_LIST_PATH,requestParams);
-     console.log('======='+JSON.stringify(data))
+    //  console.log('======='+JSON.stringify(data))
      //将店铺列表页筛选框数据写入到store
      if(isLoadMore&&data?.data){
      //将请求回的数据拼接到store中

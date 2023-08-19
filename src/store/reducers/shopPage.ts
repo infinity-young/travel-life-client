@@ -7,13 +7,14 @@ const defaultStates = {
     productListData:{},
     productListParam:{
         pageIndex:1,
-        pageSize:3
+        pageSize:2
     }
    }
 };
 
 const cases = {
     [ShopPageTypes.SET_SHOP_PAGE_INFO_REQUEST_DATA]:(state,payload)=>{
+        // console.log('======'+JSON.stringify(state))
         const newShopPageData={
             ...state.shopPageData,
             shopInfoData:{...payload}
@@ -27,7 +28,7 @@ const cases = {
         }
         return {...state,shopPageData:{...newShopListPageData}}
     },
-    [ShopPageTypes.UPDATE_PAGE_INDEX]:(state,payload)=>{
+    [ShopPageTypes.SET_SHOP_ID]:(state,payload)=>{
         const newShopListPageData={
             ...state.shopPageData,
             productListParam:{

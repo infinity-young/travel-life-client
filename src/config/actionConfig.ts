@@ -16,7 +16,7 @@ export const ShopListPageTypes = createActionTypes(
         GET_SHOP_LIST_PAGE_LIST_REQUEST: null,
         SET_SHOP_LIST_PAGE_LIST_REQUEST_DATA:null,
         INIT_SHOP_LIST_PAGE:null,
-        UPDATE_PAGE_INDEX:null,
+        // UPDATE_PAGE_INDEX:null,
         SET_PARENT_ID:null,
         SET_AREA_ID:null
     },
@@ -30,7 +30,7 @@ export const ShopPageTypes = createActionTypes(
         GET_SHOP_PAGE_LIST:null,
         SET_SHOP_PAGE_LIST:null,
         INIT_SHOP_PAGE:null,
-        UPDATE_PAGE_INDEX:null
+        SET_SHOP_ID:null
     },
     'shoppage'
 );
