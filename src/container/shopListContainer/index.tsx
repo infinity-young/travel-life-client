@@ -1,4 +1,4 @@
-import { SHOP_LIST_PAGE_IMAGE_PATH } from "../../config/imageConfig.ts";
+import { IMAGE_PATH } from "../../config/imageConfig.ts";
 import PoiCell from "../../components/poiCell/index.tsx";
 import { CellItem } from "../../interface/commonInterface.ts";
 import { ShopItemInterface } from "../../interface/shopInterface";
@@ -100,7 +100,7 @@ class ShopList extends PureComponent<Props,State>{
             const newItem:CellItem={
                 title:shopListItem.shopName,
                 desc:shopListItem.shopDesc,
-                img:SHOP_LIST_PAGE_IMAGE_PATH+shopListItem.shopImg,
+                img:IMAGE_PATH+shopListItem.shopImg,
                 id:shopListItem.shopId
             }
         return newItem;

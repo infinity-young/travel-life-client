@@ -9,6 +9,7 @@ import AreaSelectBox from "../components/areaSelectBox/index.tsx";
 import Category from "../components/category/index.tsx";
 import { categoryItem } from "interface/commonInterface.ts";
 import ShopList from '../container/shopListContainer/index.tsx'
+import { NavigationBar } from "../components/navigationBar/index.tsx";
 
 interface  ShopListPageProps{
     initShopListPage:(parentId:number)=>void;
@@ -64,8 +65,10 @@ export  class ShopListPage extends PureComponent<RouteProps&Props>{
         //todo 输入搜索词查询
         //todo 点击类别查询
         //todo 选择城市查询
+        console.log('=====11===='+JSON.stringify(this.props))
        return(
         <div>
+            <NavigationBar title={"商店列表"}/>
             <SearchBox search={this.onKeywordSearch}/>
             <Category categoryList={categoryList} onClickCategory={this.onClickCategory}/>
             <AreaSelectBox areaList={areaList} onSelectCity={this.onSelectCity}/>

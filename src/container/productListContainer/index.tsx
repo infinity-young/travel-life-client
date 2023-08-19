@@ -1,4 +1,4 @@
-import { SHOP_LIST_PAGE_IMAGE_PATH } from "../../config/imageConfig.ts";
+import { IMAGE_PATH } from "../../config/imageConfig.ts";
 import PoiCell from "../../components/poiCell/index.tsx";
 import { CellItem } from "../../interface/commonInterface.ts";
 import { PureComponent, ReactNode } from "react";
@@ -102,7 +102,7 @@ class ProductList extends PureComponent<Props,State>{
             const newItem:CellItem={
                 title:productListItem.productName,
                 desc:productListItem.productDesc,
-                img:SHOP_LIST_PAGE_IMAGE_PATH+productListItem.imgAddr,
+                img:IMAGE_PATH+productListItem.imgAddr,
                 id:productListItem.productId
             }
         return newItem;

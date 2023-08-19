@@ -2,7 +2,7 @@ import { PureComponent, ReactNode } from "react";
 import { connect } from "react-redux";
 import React from 'react';
 import styles from './index.module.scss'
-import { HOME_PAGE_IMAGE_PATH } from "../../config/imageConfig.ts";
+import { IMAGE_PATH } from "../../config/imageConfig.ts";
 
 interface Props{
     headLineList:Array<HeadLineType>
@@ -49,6 +49,7 @@ export class HeadLine extends PureComponent<Props,State>{
     render(): ReactNode {
         const {headLineList}=this.props;
         // console.log("==1===="+JSON.stringify(headLineList))
+        
         if(headLineList.length===0){
             return ( <div>
                 <button onClick={this.handleClick}>强制更新</button>
@@ -61,7 +62,7 @@ export class HeadLine extends PureComponent<Props,State>{
             {headLineList?.map((item,index)=>{
                return  <img
                key={index}
-               src={HOME_PAGE_IMAGE_PATH+item.lineImg}
+               src={IMAGE_PATH+item.lineImg}
                className={index===currentImageIndex?styles.active:styles.hidden}
                />
             })}

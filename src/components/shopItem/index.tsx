@@ -1,5 +1,5 @@
 import { PureComponent, ReactNode } from "react";
-import { HOME_PAGE_IMAGE_PATH } from "../../config/imageConfig.ts";
+import { IMAGE_PATH } from "../../config/imageConfig.ts";
 import styles from './index.module.scss'
 import React from "react";
 import { ShopCategoryItemInterface } from "interface/shopInterface.ts";
@@ -17,7 +17,7 @@ export default class ShopItem extends PureComponent<ShopCategoryItemInterface>{
                 <span>{shopCategoryDesc}</span>
             </div>
             <img
-               src={HOME_PAGE_IMAGE_PATH+shopCategoryImg}
+               src={IMAGE_PATH+shopCategoryImg}
                className={styles.img}
                />
         </div>)

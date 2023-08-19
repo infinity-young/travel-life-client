@@ -9,6 +9,7 @@ import { ShopInfoInterface } from "../interface/shopInterface";
 import { categoryItem } from "../interface/commonInterface";
 import {getShopPageList} from '../store/actions/shopPage.ts'
 import ProductList from '../container/productListContainer/index.tsx'
+import NavigationBar from "../components/navigationBar/index.tsx";
 
 interface Props{
     initShopPage:(shopId:number)=>void;
@@ -41,13 +42,20 @@ export class  ShopPage extends PureComponent<Props>{
         return categoryList
     }
     render(): ReactNode {
+        console.log('===22===='+JSON.stringify(this.props))
+        const{shop}=this.props;
+        if(!shop){
+            return <div/>
+        }
         const{productCategoryList}=this.props;
         // console.log("====productCategoryList====="+JSON.stringify(productCategoryList));
         const categoryList=this.dealWithProductCategoryList(productCategoryList);
         // console.log('=====categoryList===='+JSON.stringify(categoryList));
+        const {shopName}=shop;
 
         return(
             <div>
+                <NavigationBar title={shopName}/>
                 <span>shop page head component</span>
                 <SearchBox search={this.onKeywordSearch}/>
                 <Category categoryList={categoryList} onClickCategory={this.onClickCategory}/>
