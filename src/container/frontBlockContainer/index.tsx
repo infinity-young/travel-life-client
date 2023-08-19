@@ -1,31 +1,28 @@
 import { PureComponent, ReactNode } from "react";
-import ShopItem, { ShopCategoryItemInterface } from "../../components/shopItem/index.tsx";
+import ShopItem from "../../components/shopItem/index.tsx";
 import { connect } from "react-redux";
 import React from "react";
 import styles from './index.module.scss'
+import { ShopCategoryItemInterface } from "../../interface/shopInterface.ts";
 
 interface FrontBlockInterface{
-    shopCategoryList:Array<ShopCategoryItemInterface>
+    shopCategoryList:Array<ShopCategoryItemInterface>,
+    onItemClick:(shopCategoryId:number)=>void;
 }
 export  class FrontBlock extends PureComponent<FrontBlockInterface>{
-    componentDidUpdate(prevProps) {
-        if (prevProps.shopCategoryList !== this.props.shopCategoryList) {
-          // shopCategoryList has changed, update the component
-          const { shopCategoryList } = this.props;
-          // do something with the updated shopCategoryList
-        }
-      }
+    onItemClick=(item:ShopCategoryItemInterface)=>{
+        this.props.onItemClick(item.shopCategoryId)
+    }
 
     render(): ReactNode {
         const {shopCategoryList}=this.props;
 
-        // console.log('====shopCategoryList===='+JSON.stringify(shopCategoryList));
         if(shopCategoryList?.length===0){
             return ( <div/>);
         }
         return <div className={styles.container}>
             {shopCategoryList?.map((item,index)=>{
-                return (<div className={styles.itemContainer} key={index}>
+                return (<div className={styles.itemContainer} key={index} onClick={()=>this.onItemClick(item)}>
                     <ShopItem {...item}/>
                 </div>)
             })}
@@ -34,10 +31,8 @@ export  class FrontBlock extends PureComponent<FrontBlockInterface>{
 
 }
 const mapStateToProps=(state)=>{ 
-    // console.log('======'+JSON.stringify(state)) 
 
     const { homePageReducer: { homePageData: { shopCategoryList = [] } = {} } = {} } = state; 
-    // console.log("====shopCategoryList=="+JSON.stringify(shopCategoryList));
     return { shopCategoryList };
 }
 

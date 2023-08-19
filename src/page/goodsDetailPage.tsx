@@ -37,7 +37,6 @@ export class GoodsDetailPage extends PureComponent<Props>{
                     <span>{promotionPrice}</span>
                 </div>
                 <span>{productDesc}</span>
-                <span>goods detail page</span>
                 <span>更多房间图片</span>
                 <div>
                     {productImgList&&productImgList.length>0&&productImgList.map((item,index)=>{

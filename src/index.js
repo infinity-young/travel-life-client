@@ -18,7 +18,6 @@ root.render(
   <React.StrictMode>
     <Provider store={reduxStore}>
     <Router>
-      <Link to="/goodsdetailpage">Go to Shop List Page1</Link>
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/shoplistpage/:parentId?" component={ShopListPageWapper} />

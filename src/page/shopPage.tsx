@@ -10,6 +10,7 @@ import { categoryItem } from "../interface/commonInterface";
 import {getShopPageList} from '../store/actions/shopPage.ts'
 import ProductList from '../container/productListContainer/index.tsx'
 import NavigationBar from "../components/navigationBar/index.tsx";
+import { IMAGE_PATH } from "../config/imageConfig.ts";
 
 interface Props{
     initShopPage:(shopId:number)=>void;
@@ -51,16 +52,20 @@ export class  ShopPage extends PureComponent<Props>{
         // console.log("====productCategoryList====="+JSON.stringify(productCategoryList));
         const categoryList=this.dealWithProductCategoryList(productCategoryList);
         // console.log('=====categoryList===='+JSON.stringify(categoryList));
-        const {shopName}=shop;
+        const {shopName,shopImg,shopDesc,shopAddr,phone}=shop;
 
         return(
             <div>
                 <NavigationBar title={shopName}/>
-                <span>shop page head component</span>
+]                <div>
+                    <img src={IMAGE_PATH+shopImg}/>
+                    <span>{shopDesc}</span>
+                    <span>{shopAddr}</span>
+                    <span>{phone}</span>
+                </div>
                 <SearchBox search={this.onKeywordSearch}/>
                 <Category categoryList={categoryList} onClickCategory={this.onClickCategory}/>
                 <ProductList/>
-                <span>product list component</span>
             </div>
         )
     }

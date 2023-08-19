@@ -45,30 +45,21 @@ export  class ShopListPage extends PureComponent<RouteProps&Props>{
     onClickCategory=(categoryId:number)=>{
         this.props.setParentId({parentId:categoryId})
         this.props.refreshList()
-        // console.log('=====selectCategoryId is:===',categoryId);
     }
     onSelectCity=(areaId:number)=>{
         this.props.setCityId({areaId:areaId})
         this.props.refreshList()
-        // console.log('======areaId=====',areaId)
     }
     onKeywordSearch=(searchValue:string)=>{
-        //console.log('===123======'+JSON.stringify(searchValue))
         this.props.refreshList({listParams:{shopName:searchValue}})
     }
     render(){
-        // console.log('====pp======'+JSON.stringify(this.props));
         const {shopCategoryList=[],areaList=[]}=this.props;
         const categoryList=this.dealWithShopCategoryList(shopCategoryList);
-        // console.log('===parentIdpp==',parentId)
-        // console.log("======dfdfd====="+JSON.stringify(this.props))
-        //todo 输入搜索词查询
-        //todo 点击类别查询
-        //todo 选择城市查询
         console.log('=====11===='+JSON.stringify(this.props))
        return(
         <div>
-            <NavigationBar title={"商店列表"}/>
+            <NavigationBar title={"商店列表"} history={this.props.history}/>
             <SearchBox search={this.onKeywordSearch}/>
             <Category categoryList={categoryList} onClickCategory={this.onClickCategory}/>
             <AreaSelectBox areaList={areaList} onSelectCity={this.onSelectCity}/>
@@ -80,7 +71,6 @@ export  class ShopListPage extends PureComponent<RouteProps&Props>{
 }
 
 const mapStateToProps = state => {
-    // console.log('===shoplist===state======'+JSON.stringify(state));
     const {shopListPageReducer:{shopListPageData:{filterData:{shopCategoryList,areaList}}}}=state;
     return {
         shopCategoryList,areaList

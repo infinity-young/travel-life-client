@@ -31,10 +31,8 @@ export  class HomePage extends PureComponent<RouteProps&Props>{
         <div>
         <span> HomePage</span>
         <HeadLine/>
-          {/* <Link to={{ pathname: '/shoplistpage' }}> */}
-            <button onClick={()=>this.goToShopListpage(1)}>全部商店</button>
-          {/* </Link> */}
-        <FrontBlockContainer/>
+        <button onClick={()=>this.goToShopListpage(1)}>全部商店</button>
+        <FrontBlockContainer onItemClick={this.goToShopListpage}/>
         </div>
        )
     }
