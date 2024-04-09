@@ -47,7 +47,10 @@ export class HeadLine extends PureComponent<Props,State>{
         this.forceUpdate();
       }
     render(): ReactNode {
-        const {headLineList}=this.props;
+        console.log('=========='+JSON.stringify(this.props))
+        const { homePageReducer: { homePageData: { headLineList = [] } = {} } = {} } = this.props;
+
+        // const {headLineList}=this.props;
         // console.log("==1===="+JSON.stringify(headLineList))
         
         if(headLineList.length===0){
@@ -72,7 +75,8 @@ export class HeadLine extends PureComponent<Props,State>{
 }
 const mapStateToProps = state => {
     // console.log("=state======"+JSON.stringify(state)); 
-    const { homePageReducer: { homePageData: { headLineList = [] } = {} } = {} } = state;
-    return { headLineList };
+    // const { homePageReducer: { homePageData: { headLineList = [] } = {} } = {} } = state;
+    // return { headLineList };
+return {...state}
   };
 export default connect(mapStateToProps)(HeadLine);
