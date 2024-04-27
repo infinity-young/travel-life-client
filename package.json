@@ -94,8 +94,8 @@
   "devDependencies": {
     "@babel/preset-react": "^7.22.5",
     "@babel/preset-typescript": "^7.22.5",
-    "@types/react": "^18.2.20",
-    "@types/react-dom": "^18.2.7",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
     "@types/react-router-dom": "^5.1.7",
     "@types/webpack-env": "^1.18.1",
     "babel-preset-react-app": "^10.0.1",

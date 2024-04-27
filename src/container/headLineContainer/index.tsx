@@ -1,4 +1,4 @@
-import { PureComponent, ReactNode } from "react";
+import { ComponentType, PureComponent, ReactNode } from "react";
 import { connect } from "react-redux";
 import React from 'react';
 import styles from './index.module.scss'
@@ -6,8 +6,8 @@ import { IMAGE_PATH } from "../../config/imageConfig.ts";
 
 interface Props{
     headLineList: Array<HeadLineType>;
-    initHomePage: () => void;
 }
+
 interface HeadLineType{
     lineId:number;
     lineName:string;
@@ -60,4 +60,6 @@ const mapStateToProps = state => {
     return { headLineList };
 };
 
-export default connect(mapStateToProps)(HeadLine);
+
+export default connect(mapStateToProps, null)(HeadLine);
+

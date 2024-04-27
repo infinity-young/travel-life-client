@@ -4,7 +4,7 @@ import HeadLine from "../container/headLineContainer/index.tsx";
 import FrontBlockContainer  from "../container/frontBlockContainer/index.tsx";
 import { initHomePage } from "../store/actions/homePage.ts";
 import { connect } from "react-redux";
-import { withRouter, RouteProps } from 'react-router-dom';
+import {RouteComponentProps} from 'react-router-dom';
 
 
 interface Props {
@@ -12,7 +12,7 @@ interface Props {
 }
 
 
-export  class HomePage extends PureComponent<RouteProps&Props>{
+export  class HomePage extends PureComponent<RouteComponentProps&Props>{
   constructor(props) {
     super(props);
     
@@ -46,10 +46,6 @@ const mapDispatchToProps=(dispatch)=>{
     initHomePage:()=>dispatch(initHomePage())
   }
 }
-// const mapStateToProps = (state) => {
-//   return state;
-// }
-
 export default connect(null, mapDispatchToProps)(HomePage);
 
 
