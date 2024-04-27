@@ -10,7 +10,6 @@ interface GoodsDetailParam{
 function *initGoodsDetail(){
     //将跳链需带入数据 todo
     //请求goodsDetail的数据
-    console.log('===init===')
     const goodsDetailParam:GoodsDetailParam={
         productId:10
     }
@@ -23,7 +22,6 @@ function *getGoodsDetailPageInfomation(action){
     const data = yield call(Request,GOODS_DETAIL_PATH,goodsDetailParam)
     //将数据写入到store
     if(data?.data){//getGoodsDetailPageData
-        console.log('======data.data==='+JSON.stringify(data.data))
         yield put(yield call(setGoodsDetailPageData,data.data));
     }
 }

@@ -37,9 +37,7 @@ function *getShopPageInfoData(action){
 }
 
 function *getShopPageListData(action?){
-    console.log('===action========'+JSON.stringify(action))
     const {isLoadMore=false}=action?.payload||{};
-    console.log('=22=====',isLoadMore)
     const{goodsListParam}=action?.payload||{};
     //从store中获取请求参数
     const listParams=yield select(state=>state.shopPageReducer.shopPageData.productListParam)
@@ -53,12 +51,9 @@ function *getShopPageListData(action?){
     //将店铺goods列表写入到store
     if(isLoadMore&&data?.data){
     //将请求回的数据拼接到store中
-    console.log('======0')
     const goodsList=yield select(state=>state.shopPageReducer.shopPageData.productListData.productList)
-    console.log('==goodsListgoodsList===='+JSON.stringify(goodsList));
     const goodsListNew=goodsList.concat(data.data.productList);
     const listData={...data.data,productList:goodsListNew}
-    console.log('===listData123======='+JSON.stringify(listData));
     yield put(yield call(setShopPageList,listData));
     }
     else if(data?.data){

@@ -13,9 +13,13 @@ interface Props {
 
 
 export  class HomePage extends PureComponent<RouteProps&Props>{
-  constructor(props){
+  constructor(props) {
     super(props);
+    
+  }
+  componentDidMount() {
     this.props.initHomePage();
+      
   }
   goToShopListpage=(parentId?:number)=>{
     //点击全部按钮和底部button，跳转到店铺列表页
@@ -25,7 +29,7 @@ export  class HomePage extends PureComponent<RouteProps&Props>{
       this.props.history.push('/shoplistpage');
     }
   }
-    render(): ReactNode {
+  render(): ReactNode {
        return (
         <div>
         <span> HomePage</span>
@@ -42,8 +46,11 @@ const mapDispatchToProps=(dispatch)=>{
     initHomePage:()=>dispatch(initHomePage())
   }
 }
+// const mapStateToProps = (state) => {
+//   return state;
+// }
 
-export default connect(null, mapDispatchToProps)(withRouter(HomePage));
+export default connect(null, mapDispatchToProps)(HomePage);
 
 
 

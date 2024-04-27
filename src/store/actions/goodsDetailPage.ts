@@ -3,7 +3,6 @@ import { GoodsDetailPageTypes } from "../../config/actionConfig.ts";
 
 
 export function initGoodsDetailPage(){
-    console.log('======action======')
    return {
     type:GoodsDetailPageTypes.INIT_GOODS_DETAIL
    }

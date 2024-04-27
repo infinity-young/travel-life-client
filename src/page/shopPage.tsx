@@ -43,15 +43,12 @@ export class  ShopPage extends PureComponent<Props>{
         return categoryList
     }
     render(): ReactNode {
-        console.log('===22===='+JSON.stringify(this.props))
         const{shop}=this.props;
         if(!shop){
             return <div/>
         }
         const{productCategoryList}=this.props;
-        // console.log("====productCategoryList====="+JSON.stringify(productCategoryList));
         const categoryList=this.dealWithProductCategoryList(productCategoryList);
-        // console.log('=====categoryList===='+JSON.stringify(categoryList));
         const {shopName,shopImg,shopDesc,shopAddr,phone}=shop;
 
         return(

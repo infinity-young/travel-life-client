@@ -16,7 +16,6 @@ export class GoodsDetailPage extends PureComponent<Props>{
         this.props.initGoodsDetailPage()
     }
     render(): ReactNode {
-        console.log('===33===='+JSON.stringify(this.props))
         const {product}=this.props;
         if(!product){
             return <div/>
@@ -56,7 +55,6 @@ export class GoodsDetailPage extends PureComponent<Props>{
 }
 
 const mapStateToProps=(state)=>{
-    console.log('======='+JSON.stringify(state))
     const{goodsDetailPageReducer:{goodsDetailPageData:{product={}}={}}={}}=state;
     return{product}
 }

@@ -35,14 +35,12 @@ function *fetchShopListPageListData(action){
     }
      //请求店铺列表页筛选框数据
      const data = yield call(Request,SHOP_LIST_PAGE_LIST_PATH,requestParams);
-    //  console.log('======='+JSON.stringify(data))
      //将店铺列表页筛选框数据写入到store
      if(isLoadMore&&data?.data){
      //将请求回的数据拼接到store中
      const shopList = yield select(state => state.shopListPageReducer.shopListPageData.listData.shopList);
      const shopListNew=shopList.concat(data.data.shopList);
      const listData={...data.data,shopList:shopListNew}
-    //  console.log('=====listDatalistDatalistDatalistData===='+JSON.stringify(listData));
      yield put(yield call(setShopListPageListData,listData));
      }
      else if(data?.data){

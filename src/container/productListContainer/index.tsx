@@ -46,12 +46,10 @@ class ProductList extends PureComponent<Props,State>{
           return;
         }
         // 设置isLoading为true，表示正在加载数据
-        console.log('cc===before===='+JSON.stringify(this.state.pageIndex))
         this.setState({
           isLoading: true,
           pageIndex:this.state.pageIndex+1
         });
-        console.log('cc====after==='+JSON.stringify(this.state.pageIndex))
          //发起请求，但是要如何感知请求已经返回来将isLoading设置为false呢？(在数据返回组件更新时)//goodsListParam
         this.props.loadMoreListData({goodsListParam:{pageIndex:this.state.pageIndex}});
       }
@@ -64,7 +62,6 @@ class ProductList extends PureComponent<Props,State>{
       rowRenderer({ index, key, style }) {
         // 渲染每一行的内容
         const item = this.dealListData(this.state.listdata[index]);
-        // console.log('=======item===='+JSON.stringify(item));
     
         return (
           <div key={key} style={style}>
@@ -79,11 +76,11 @@ class ProductList extends PureComponent<Props,State>{
           </div>
         );
       }
-      shouldComponentUpdate(nextProps: Readonly<Props>): boolean {
-          //如果列表数据变长了应该刷新页面
-          return nextProps.productList?.length!==this.props.productList?.length;
+      // shouldComponentUpdate(nextProps: Readonly<Props>): boolean {
+      //     //如果列表数据变长了应该刷新页面
+      //     return nextProps.productList?.length!==this.props.productList?.length;
 
-      }
+      // }
       componentDidUpdate() {
           //刷新页面的时候更新列表项的配置
           this.setState(
@@ -112,7 +109,6 @@ class ProductList extends PureComponent<Props,State>{
     }
     render(): ReactNode {
         const {productList=[]}=this.props;
-        // console.log('=====shopListshopList===='+JSON.stringify(shopList));
         if(productList===null||productList.length==0){
             return <div/>
         }
@@ -143,10 +139,7 @@ class ProductList extends PureComponent<Props,State>{
 }
 
 const mapStateToProps=(state)=>{
-    // console.log('=====qwe===='+JSON.stringify(state))
     const {shopPageReducer:{shopPageData:{productListData:{productList=[],count=0}}}}=state;
-    console.log('=====shopList=productList=='+JSON.stringify(productList));
-    // console.log('=======cc======',count);
     return {
         productList,
         count

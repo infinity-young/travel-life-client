@@ -14,7 +14,6 @@ const defaultStates = {
 
 const cases = {
     [ShopPageTypes.SET_SHOP_PAGE_INFO_REQUEST_DATA]:(state,payload)=>{
-        // console.log('======'+JSON.stringify(state))
         const newShopPageData={
             ...state.shopPageData,
             shopInfoData:{...payload}

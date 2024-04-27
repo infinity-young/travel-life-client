@@ -1,7 +1,6 @@
 import { ShopPageTypes } from "../../config/actionConfig.ts";
 
 export function initShopPage(payload){
-    // console.log('=====init=====')
    return {
     type:ShopPageTypes.INIT_SHOP_PAGE,
     payload

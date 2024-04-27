@@ -15,7 +15,7 @@ import GoodsDetailPage from '../src/page/goodsDetailPage.tsx';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const reduxStore = createStoreByRootTag()
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <Provider store={reduxStore}>
     <Router>
         <Switch>
@@ -26,7 +26,7 @@ root.render(
         </Switch>
       </Router>
     </Provider>
-  </React.StrictMode>
+    // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -56,7 +56,6 @@ export  class ShopListPage extends PureComponent<RouteProps&Props>{
     render(){
         const {shopCategoryList=[],areaList=[]}=this.props;
         const categoryList=this.dealWithShopCategoryList(shopCategoryList);
-        console.log('=====11===='+JSON.stringify(this.props))
        return(
         <div>
             <NavigationBar title={"商店列表"} history={this.props.history}/>

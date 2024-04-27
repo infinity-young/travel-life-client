@@ -1,4 +1,4 @@
-import { all, call, put, takeEvery } from 'redux-saga/effects'
+import { all, call, put, takeLatest } from 'redux-saga/effects'
 import { HOME_PAGE_PATH } from '../../config/requestConfig.ts'
 import {Request} from '../../request/index.ts'
 import { HomePageTypes } from '../../config/actionConfig.ts';
@@ -11,7 +11,6 @@ function  *initHomePage(){
 function *getHomePageInfomation(){
     const data = yield call(Request,HOME_PAGE_PATH)
     //将数据写入到store
-    // console.log("==mydata===="+JSON.stringify(data));
     if(data?.data){
         yield put(yield call(setHomePageData,data.data));
     }
@@ -20,7 +19,7 @@ function *getHomePageInfomation(){
 
 export default function*(){
     yield all([
-        takeEvery(HomePageTypes.INIT_HOME_PAGE,initHomePage),
-        takeEvery(HomePageTypes.GET_HOME_PAGE_REQUEST,getHomePageInfomation)
+        takeLatest(HomePageTypes.INIT_HOME_PAGE,initHomePage),
+        takeLatest(HomePageTypes.GET_HOME_PAGE_REQUEST,getHomePageInfomation)
     ])
 }

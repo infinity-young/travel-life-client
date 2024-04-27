@@ -40,7 +40,6 @@ const cases = {
     //     }
     // },
     [ShopListPageTypes.SET_PARENT_ID]:(state,payload)=>{
-        // console.log('==1===='+JSON.stringify(payload))
         const newShopListPageData={
             ...state.shopListPageData,
             listRequestParam:{
@@ -48,7 +47,6 @@ const cases = {
                 ...payload
             }
         }
-        // console.log('====2==='+JSON.stringify(newShopListPageData))
         return{
             ...state, shopListPageData:{...newShopListPageData}
         }

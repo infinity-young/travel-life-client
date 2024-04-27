@@ -62,7 +62,6 @@ class ShopList extends PureComponent<Props,State>{
       rowRenderer({ index, key, style }) {
         // 渲染每一行的内容
         const item = this.dealListData(this.state.listdata[index]);
-        // console.log('=======item===='+JSON.stringify(item));
     
         return (
           <div key={key} style={style}>
@@ -77,11 +76,11 @@ class ShopList extends PureComponent<Props,State>{
           </div>
         );
       }
-      shouldComponentUpdate(nextProps: Readonly<Props>): boolean {
-          //如果列表数据变长了应该刷新页面
-          return nextProps.shopList?.length!==this.props.shopList?.length;
+      // shouldComponentUpdate(nextProps: Readonly<Props>): boolean {
+      //     //如果列表数据变长了应该刷新页面
+      //     return nextProps.shopList?.length!==this.props.shopList?.length;
 
-      }
+      // }
       componentDidUpdate() {
           //刷新页面的时候更新列表项的配置
           this.setState(
@@ -110,7 +109,6 @@ class ShopList extends PureComponent<Props,State>{
     }
     render(): ReactNode {
         const {shopList=[]}=this.props;
-        // console.log('=====shopListshopList===='+JSON.stringify(shopList));
         if(shopList===null||shopList.length==0){
             return <div/>
         }
@@ -141,10 +139,7 @@ class ShopList extends PureComponent<Props,State>{
 }
 
 const mapStateToProps=(state)=>{
-    // console.log('=====qwe===='+JSON.stringify(state))
     const {shopListPageReducer:{shopListPageData:{listData:{shopList=[],count=0}}}}=state
-    // console.log('=====shopList==='+JSON.stringify(shopList));
-    // console.log('=======cc======',count);
 
     return {
         shopList,
