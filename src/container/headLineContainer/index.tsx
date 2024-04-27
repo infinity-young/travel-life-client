@@ -1,8 +1,9 @@
 import { ComponentType, PureComponent, ReactNode } from "react";
-import { connect } from "react-redux";
+import { ConnectedProps, connect } from "react-redux";
 import React from 'react';
 import styles from './index.module.scss'
 import { IMAGE_PATH } from "../../config/imageConfig.ts";
+import { stateType } from 'interface/stateInterface.ts';
 
 interface Props{
     headLineList: Array<HeadLineType>;
@@ -21,7 +22,7 @@ interface HeadLineType{
 interface State{
     currentImageIndex:number;
 }
-export class HeadLine extends PureComponent<Props,State>{
+export class HeadLine extends React.Component<Props,State>{
     private interval;
     constructor(props){
         super(props);
@@ -55,11 +56,14 @@ export class HeadLine extends PureComponent<Props,State>{
     }
 
 }
-const mapStateToProps = state => {
+const mapStateToProps = (state:stateType) => {
     const { homePageReducer: { homePageData: { headLineList = [] } = {} } = {} } = state;
     return { headLineList };
 };
 
+const connector = connect(mapStateToProps, null);
 
-export default connect(mapStateToProps, null)(HeadLine);
+// 从连接器中提取 Props 类型
+type PropsFromRedux = ConnectedProps<typeof connector>;
+export default connector(HeadLine as PropsFromRedux);
 
