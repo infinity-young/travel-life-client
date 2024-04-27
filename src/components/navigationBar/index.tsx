@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
-import { withRouter } from 'react-router-dom';
-interface Props{
+import { withRouter,RouteComponentProps } from 'react-router-dom';
+interface Props extends RouteComponentProps{
     title:string
 }
 export  class NavigationBar extends PureComponent<Props>{

@@ -5,7 +5,7 @@ import styles from './index.module.scss'
 import { IMAGE_PATH } from "../../config/imageConfig.ts";
 import { stateType } from 'interface/stateInterface.ts';
 
-interface Props{
+interface Props {
     headLineList: Array<HeadLineType>;
 }
 

@@ -4,13 +4,13 @@ import { CellItem } from "../../interface/commonInterface.ts";
 import { PureComponent, ReactNode } from "react";
 import React from 'react';
 import { connect } from "react-redux";
-import { withRouter } from 'react-router-dom';
+import { withRouter,RouteComponentProps } from 'react-router-dom';
 import { List, AutoSizer, InfiniteLoader } from 'react-virtualized';
 import { productItemInterface } from "../../interface/productInterface.ts";
 import { getShopPageList } from "../../store/actions/shopPage.ts";
 
 
-interface Props{
+interface Props extends RouteComponentProps{
     productList:Array<productItemInterface>,
     count:number,
     loadMoreListData:(params)=>void
