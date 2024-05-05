@@ -1,10 +1,12 @@
 import React from "react";
 import { PureComponent, ReactNode } from "react";
-import HeadLine from "../container/headLineContainer/index.tsx";
-import FrontBlockContainer  from "../container/frontBlockContainer/index.tsx";
-import { initHomePage } from "../store/actions/homePage.ts";
+import HeadLine from "../../container/headLineContainer/index.tsx";
+import FrontBlockContainer  from "../../container/frontBlockContainer/index.tsx";
+import { initHomePage } from "../../store/actions/homePage.ts";
 import { connect } from "react-redux";
-import {RouteComponentProps} from 'react-router-dom';
+import { RouteComponentProps } from 'react-router-dom';
+import styles from './index.module.scss'
+
 
 
 interface Props {
@@ -34,7 +36,7 @@ export  class HomePage extends PureComponent<RouteComponentProps&Props>{
         <div>
         <span> HomePage</span>
         <HeadLine/>
-        <button onClick={()=>this.goToShopListpage()}>全部商店</button>
+        <button onClick={()=>this.goToShopListpage()} className={styles.button}>全部商店</button>
         <FrontBlockContainer onItemClick={this.goToShopListpage}/>
         </div>
        )
