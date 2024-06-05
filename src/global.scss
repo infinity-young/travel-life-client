@@ -51,28 +51,6 @@ input:focus {
   outline: 2px solid #fba8a8; /* 添加红色轮廓，可以替换为你想要的颜色 */
 }
 
-button {
-  padding: 10px 20px;
-  font-size: 16px;
-  text-align: center;
-  cursor: pointer;
-  outline: none;
-  color: #fff;
-  background-color: #ce7791;
-  border: none;
-  border-radius: 15px;
-}
-
-button:hover {
-  background-color: #d3a8b5;
-}
-
-button:active {
-  background-color: #d3a8b5;
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
-}
-
 .title-text {
   font-size: 2em; /* 字体大小 */
   text-align: center; /* 居中对齐 */
