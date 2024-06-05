@@ -38,11 +38,11 @@ export class GoodsDetailPage extends PureComponent<Props>{
                             </div>
                             <div className={style.itemContainer}>
                                 <div className={style.title}>促销价</div>
-                                <del className={style.discountPrice}>¥{promotionPrice }</del>
+                                <span className={style.discountPrice}>¥{promotionPrice }</span>
                             </div>
                             <div className={style.itemContainer}>
                                 <div className={style.title}>商品详情</div>
-                                <del className={style.originalPrice}>{productDesc }</del>
+                                <span>{productDesc }</span>
                             </div>
                         </div>
                     </div>
