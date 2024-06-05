@@ -1,0 +1,127 @@
+/* 去除浏览器默认外边距 */
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-image: url('../images/background.png'); /* 背景图片的路径 */
+  background-size: cover; /* 背景图片覆盖整个页面 */
+  background-position: center center; /* 背景图片居中显示 */
+  background-attachment: fixed; /* 背景图片固定，不随滚动条滚动 */
+  background-repeat: no-repeat; /* 背景图片不重复 */
+}
+/* 默认铺满整个屏幕并添加边距 */
+#app {
+  margin: 0 auto;
+  padding: 2rem;
+  font-weight: normal;
+  width: 100%;
+  height: 100%;
+}
+
+/**
+设置所有a标签和类名为green的所有元素的样式
+*/
+a,
+.green {
+  text-decoration: none;
+  color: hsla(160, 100%, 37%, 1);
+  transition: 0.4s;
+}
+
+/*
+检测鼠标是否悬停在元素上，如果支持鼠标悬停，当用户的鼠标悬停在a标签上时，使用如下样式。
+*/
+@media (hover: hover) {
+  a:hover {
+    background-color: hsla(160, 100%, 37%, 0.2);
+  }
+}
+
+/* 设置所有input框的默认边框颜色 */
+input {
+  border: 1px solid #cccccc; /* 默认的边框颜色 */
+  outline: none; /* 移除默认轮廓 */
+}
+
+/* 设置input框聚焦时的边框颜色 */
+input:focus {
+  border: 1px solid #eebaba;
+  outline: 2px solid #fba8a8; /* 添加红色轮廓，可以替换为你想要的颜色 */
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #ce7791;
+  border: none;
+  border-radius: 15px;
+}
+
+button:hover {
+  background-color: #d3a8b5;
+}
+
+button:active {
+  background-color: #d3a8b5;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.title-text {
+  font-size: 2em; /* 字体大小 */
+  text-align: center; /* 居中对齐 */
+  color: #c65577; /* 字体颜色 */
+  background: -webkit-linear-gradient(45deg, #fe6b8b 30%, #ff8e53 90%); /* 背景渐变 */
+  -webkit-background-clip: text; /* 文字背景裁剪 */
+  text-shadow: 0px 0px 6px rgba(251, 221, 221, 0.901); /* 文字阴影 */
+  font-weight: bold; /* 字体加粗 */
+  margin: 20px;
+  animation: glow 9s ease-in-out infinite alternate; /* 动画效果 */
+}
+
+/* 动画关键帧 */
+@keyframes glow {
+  from {
+    text-shadow:
+      0 0 10px #eba6a6,
+      0 0 20px #e57a7a,
+      0 0 30px #be4a5a,
+      0 0 40px #e65050,
+      0 0 50px #e83547,
+      0 0 60px #e54242,
+      0 0 70px #e60000;
+  }
+  to {
+    text-shadow:
+      0 0 10px #ecdede,
+      0 0 20px #d8a5a5,
+      0 0 30px #c47680,
+      0 0 40px #d89292,
+      0 0 50px #d98991,
+      0 0 60px #de5858,
+      0 0 70px #db4747;
+  }
+}
+.footer-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.common-page-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100%;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
+}

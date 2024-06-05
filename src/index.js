@@ -6,9 +6,10 @@ import { Provider } from 'react-redux'
 import ShopListPageWapper from './page/shopListPage';
 import HomePage from '../src/page/homePage/index.tsx';
 import { BrowserRouter as Router,Switch, Route } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import ShopPage from '../src/page/shopPage.tsx';
 import GoodsDetailPage from '../src/page/goodsDetailPage.tsx';
+import './global.scss';
+
 
 
 
