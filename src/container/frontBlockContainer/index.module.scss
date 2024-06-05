@@ -2,12 +2,11 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: space-between;
 }
 .itemContainer {
-  height: 300px;
-  width: 44vw;
-  margin: 12px;
-  margin-left: 2.5vw;
-  margin-right: 2.5vw;
+  height: 50%;
+  width: 48%;
   border-radius: 12px;
+  margin-top: 12px;
 }

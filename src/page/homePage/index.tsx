@@ -33,11 +33,13 @@ export  class HomePage extends PureComponent<RouteComponentProps&Props>{
   }
   render(): ReactNode {
        return (
-        <div>
-        <span> HomePage</span>
-        <HeadLine/>
-        <button onClick={()=>this.goToShopListpage()} className={styles.button}>全部商店</button>
-        <FrontBlockContainer onItemClick={this.goToShopListpage}/>
+        <div className='common-page-container'>
+          <div className='title-text'>Travel Life</div>
+           <div >
+             <HeadLine/>
+             <button onClick={() => this.goToShopListpage()}>全部商店</button>
+             <FrontBlockContainer onItemClick={this.goToShopListpage}/>
+            </div>
         </div>
        )
     }

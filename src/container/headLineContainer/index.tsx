@@ -46,11 +46,14 @@ export class HeadLine extends React.Component<Props,State>{
         const{currentImageIndex}=this.state;
         return(<div className={styles.container}>
             {headLineList?.map((item,index)=>{
-               return  <img
-               key={index}
-               src={IMAGE_PATH+item.lineImg}
-               className={index===currentImageIndex?styles.active:styles.hidden}
+                return (
+                <a key={index} href={item.lineLink} target="_blank" rel="noopener noreferrer">
+                 <img
+                    key={index}
+                    src={IMAGE_PATH+item.lineImg}
+                    className={index===currentImageIndex?styles.active:styles.hidden}
                />
+              </a>)
             })}
         </div>)
     }
