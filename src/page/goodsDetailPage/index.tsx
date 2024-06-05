@@ -5,6 +5,7 @@ import { initGoodsDetailPage } from "../../store/actions/goodsDetailPage";
 import { productItemInterface } from "../../interface/productInterface";
 import NavigationBar from "../../components/navigationBar";
 import { IMAGE_PATH } from "../../config/imageConfig";
+import style from './index.module.scss'
 
 interface Props{
     initGoodsDetailPage:()=>void;
@@ -23,32 +24,43 @@ export class GoodsDetailPage extends PureComponent<Props>{
         const{productName,imgAddr,productDesc,normalPrice,promotionPrice,productImgList}=product;
         return (
             <div>
-                <NavigationBar title={productName}/>
-                <img
-                src={IMAGE_PATH+imgAddr}
-                />
-                <div>
-                    <span>￥</span>
-                    <span>{normalPrice}</span>
+                <NavigationBar title={productName} />
+                <div className='common-page-container'>
+                    <div className='title-text' >{productName}</div>
+                    <div className={style.card}>
+                        <div className={style.headerImage}>
+                            <img src={IMAGE_PATH+imgAddr}/>
+                        </div>
+                        <div className={style.headContentContainer}>
+                            <div className={style.itemContainer}>
+                                <div className={style.title}>原价</div>
+                                <del className={style.originalPrice}>¥{normalPrice }</del>
+                            </div>
+                            <div className={style.itemContainer}>
+                                <div className={style.title}>促销价</div>
+                                <del className={style.discountPrice}>¥{promotionPrice }</del>
+                            </div>
+                            <div className={style.itemContainer}>
+                                <div className={style.title}>商品详情</div>
+                                <del className={style.originalPrice}>{productDesc }</del>
+                            </div>
+                        </div>
+                    </div>
+                    <div className={style.card}>
+                        <span className={style.detailTitle}>商品详情图片</span>
+                        <div className={style.detailImages}>
+                        {productImgList&&productImgList.length>0&&productImgList.map((item,index)=>{
+                            const imgPath=IMAGE_PATH+item.imgAddr;
+                            return(
+                                <img 
+                                src={imgPath}
+                                key={index}
+                                />
+                            )
+                        })}
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <span>￥</span>
-                    <span>{promotionPrice}</span>
-                </div>
-                <span>{productDesc}</span>
-                <span>更多房间图片</span>
-                <div>
-                    {productImgList&&productImgList.length>0&&productImgList.map((item,index)=>{
-                        const imgPath=IMAGE_PATH+item.imgAddr;
-                        return(
-                            <img 
-                            src={imgPath}
-                            key={index}
-                            />
-                        )
-                    })}
-                </div>
-
             </div>
         )
     }
