@@ -1,16 +1,16 @@
-import Category from "../components/category";
-import SearchBox from "../components/searchBox";
+import Category from "../../components/category";
+import SearchBox from "../../components/searchBox";
 import { PureComponent, ReactNode } from "react";
 import React from 'react'
 import { connect } from "react-redux";
-import { initShopPage } from "../store/actions/shopPage";
-import { productCategoryInterface, productItemInterface } from "../interface/productInterface";
-import { ShopInfoInterface } from "../interface/shopInterface";
-import { categoryItem } from "../interface/commonInterface";
-import {getShopPageList} from '../store/actions/shopPage.ts'
-import ProductList from '../container/productListContainer/index.tsx'
-import NavigationBar from "../components/navigationBar/index.tsx";
-import { IMAGE_PATH } from "../config/imageConfig.ts";
+import { initShopPage } from "../../store/actions/shopPage";
+import { productCategoryInterface, productItemInterface } from "../../interface/productInterface";
+import { ShopInfoInterface } from "../../interface/shopInterface";
+import { categoryItem } from "../../interface/commonInterface";
+import {getShopPageList} from '../../store/actions/shopPage.ts'
+import ProductList from '../../container/productListContainer/index.tsx'
+import NavigationBar from "../../components/navigationBar/index.tsx";
+import { IMAGE_PATH } from "../../config/imageConfig.ts";
 
 interface Props{
     initShopPage:(shopId:number)=>void;

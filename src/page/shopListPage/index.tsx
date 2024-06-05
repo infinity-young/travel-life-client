@@ -2,14 +2,14 @@ import { PureComponent } from "react";
 import React from "react";
 import { withRouter, RouteProps } from 'react-router-dom';
 import { connect, ConnectedProps } from 'react-redux';
-import { getShopListPageListData, initShopListPage, setShopListAreaId, setShopListParentId } from "../store/actions/shopListPage.ts";
-import SearchBox from "../components/searchBox/index.tsx";
+import { getShopListPageListData, initShopListPage, setShopListAreaId, setShopListParentId } from "../../store/actions/shopListPage.ts";
+import SearchBox from "../../components/searchBox/index.tsx";
 import { AreaItem, ShopCategoryItemInterface } from "interface/shopInterface.ts";
-import AreaSelectBox from "../components/areaSelectBox/index.tsx";
-import Category from "../components/category/index.tsx";
+import AreaSelectBox from "../../components/areaSelectBox/index.tsx";
+import Category from "../../components/category/index.tsx";
 import { categoryItem } from "interface/commonInterface.ts";
-import ShopList from '../container/shopListContainer/index.tsx'
-import { NavigationBar } from "../components/navigationBar/index.tsx";
+import ShopList from '../../container/shopListContainer/index.tsx'
+import { NavigationBar } from "../../components/navigationBar/index.tsx";
 
 interface  ShopListPageProps{
     initShopListPage:(parentId:number)=>void;

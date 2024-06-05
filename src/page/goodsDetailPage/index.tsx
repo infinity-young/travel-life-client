@@ -1,10 +1,10 @@
 import { PureComponent, ReactNode } from "react";
 import React from 'react'
 import { connect } from "react-redux";
-import { initGoodsDetailPage } from "../store/actions/goodsDetailPage";
-import { productItemInterface } from "../interface/productInterface";
-import NavigationBar from "../components/navigationBar";
-import { IMAGE_PATH } from "../config/imageConfig";
+import { initGoodsDetailPage } from "../../store/actions/goodsDetailPage";
+import { productItemInterface } from "../../interface/productInterface";
+import NavigationBar from "../../components/navigationBar";
+import { IMAGE_PATH } from "../../config/imageConfig";
 
 interface Props{
     initGoodsDetailPage:()=>void;

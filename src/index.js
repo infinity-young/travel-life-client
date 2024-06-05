@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 import createStoreByRootTag from '../src/store/index.ts';
 import { Provider } from 'react-redux'
-import ShopListPageWapper from './page/shopListPage';
+import ShopListPageWapper from './page/shopListPage/index.tsx';
 import HomePage from '../src/page/homePage/index.tsx';
 import { BrowserRouter as Router,Switch, Route } from 'react-router-dom';
-import ShopPage from '../src/page/shopPage.tsx';
-import GoodsDetailPage from '../src/page/goodsDetailPage.tsx';
+import ShopPage from '../src/page/shopPage/index.tsx';
+import GoodsDetailPage from '../src/page/goodsDetailPage/index.tsx';
 import './global.scss';
 
 
