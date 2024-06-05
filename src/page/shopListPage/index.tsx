@@ -10,6 +10,7 @@ import Category from "../../components/category/index.tsx";
 import { categoryItem } from "interface/commonInterface.ts";
 import ShopList from '../../container/shopListContainer/index.tsx'
 import { NavigationBar } from "../../components/navigationBar/index.tsx";
+import style from './index.module.scss'
 
 interface  ShopListPageProps{
     initShopListPage:(parentId:number)=>void;
@@ -58,11 +59,16 @@ export  class ShopListPage extends PureComponent<RouteProps&Props>{
         const categoryList=this.dealWithShopCategoryList(shopCategoryList);
        return(
         <div className='common-page-container'>
-            <NavigationBar title={"商店列表"} history={this.props.history}/>
-            <SearchBox search={this.onKeywordSearch}/>
-            <Category categoryList={categoryList} onClickCategory={this.onClickCategory}/>
-            <AreaSelectBox areaList={areaList} onSelectCity={this.onSelectCity}/>
-            <ShopList/>
+            <NavigationBar history={this.props.history} />
+            <div className='title-text'>商店列表</div>
+               <div className={style.contentContainer}>
+                    <SearchBox search={this.onKeywordSearch}/>
+                    <Category categoryList={categoryList} onClickCategory={this.onClickCategory}/>
+                    <AreaSelectBox areaList={areaList} onSelectCity={this.onSelectCity}/>
+                    <div className={style.listContainer}>
+                       <ShopList/>
+                    </div>
+               </div>
             <span> list1</span>
         </div>
        )

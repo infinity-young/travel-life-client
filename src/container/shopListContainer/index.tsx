@@ -122,7 +122,7 @@ class ShopList extends PureComponent<Props,State>{
               <AutoSizer>
                 {() => (
                   <List
-                    height={window.innerHeight}
+                    height={600}
                     width={window.innerWidth}
                     rowCount={this.state.hasNextPage ? this.state.listdata.length + 1 : this.state.listdata.length}
                     rowHeight={200}
