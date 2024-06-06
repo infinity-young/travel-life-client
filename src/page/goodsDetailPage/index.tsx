@@ -8,13 +8,13 @@ import { IMAGE_PATH } from "../../config/imageConfig";
 import style from './index.module.scss'
 
 interface Props{
-    initGoodsDetailPage:()=>void;
+    initGoodsDetailPage:(productId:string)=>void;
     product:productItemInterface
 }
 export class GoodsDetailPage extends PureComponent<Props>{
     constructor(props){
         super(props)
-        this.props.initGoodsDetailPage()
+        this.props.initGoodsDetailPage(this.props.match.params?.productId)
     }
     render(): ReactNode {
         const {product}=this.props;
@@ -72,7 +72,7 @@ const mapStateToProps=(state)=>{
 }
 const mapDispatchToProps=(dispatch)=>{
     return{
-        initGoodsDetailPage:()=>dispatch(initGoodsDetailPage())
+        initGoodsDetailPage:(productId:string)=>dispatch(initGoodsDetailPage({productId:productId}))
     }
 }
 

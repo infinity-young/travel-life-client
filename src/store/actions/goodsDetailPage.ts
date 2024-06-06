@@ -2,9 +2,10 @@ import { GoodsDetailPageTypes } from "../../config/actionConfig.ts";
 
 
 
-export function initGoodsDetailPage(){
+export function initGoodsDetailPage(payload) {
    return {
-    type:GoodsDetailPageTypes.INIT_GOODS_DETAIL
+       type: GoodsDetailPageTypes.INIT_GOODS_DETAIL,
+       payload
    }
 }
 

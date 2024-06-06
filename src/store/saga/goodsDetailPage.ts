@@ -7,11 +7,11 @@ import { setGoodsDetailPageData,getGoodsDetailPageData } from '../actions/goodsD
 interface GoodsDetailParam{
     productId:number;
 }
-function *initGoodsDetail(){
-    //将跳链需带入数据 todo
+function* initGoodsDetail(action) {
     //请求goodsDetail的数据
+    const {productId}=action?.payload||{}
     const goodsDetailParam:GoodsDetailParam={
-        productId:10
+        productId:productId
     }
     yield put(yield call(getGoodsDetailPageData,{goodsDetailParam:{...goodsDetailParam}}))
 }
