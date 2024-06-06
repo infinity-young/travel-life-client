@@ -1,9 +1,10 @@
-.button-group {
+.filterButtonContainer {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  margin-top: 6px;
+  margin-bottom: 6px;
 }
-
-.button {
-  width: 30%;
+.button{
+  width: 19%;
 }

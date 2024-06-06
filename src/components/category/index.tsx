@@ -1,6 +1,7 @@
 import { categoryItem } from "interface/commonInterface";
 import { PureComponent, ReactNode } from "react";
 import React from 'react'
+import style from './index.module.scss'
 interface Props{
     categoryList:Array<categoryItem>,
     onClickCategory:(categoryId:number)=>void;
@@ -15,12 +16,12 @@ export default class Category extends PureComponent<Props>{
             return <div/>
         }
         return (
-            <div className="button-group">
+            <div className={style.filterButtonContainer}>
               {categoryList.map((button, index) => (
                 <button 
                 key={index} 
-                className="button"
-                onClick={()=>this.onClickButton(button)}
+                  onClick={() => this.onClickButton(button)}
+                  className={style.button}
                 >
                   {button.categoryName}
                 </button>

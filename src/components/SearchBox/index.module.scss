@@ -1,0 +1,15 @@
+.searchContainer{
+   display: flex;
+   flex-direction: row;
+   width: 100%;
+   margin-top: 6px;
+   margin-bottom: 6px;
+}
+.inputBox{
+   display: flex;
+   flex:1;
+   height: 40px;
+   margin-right: 10px;
+   border-radius: 15px;
+   text-align: center;
+}

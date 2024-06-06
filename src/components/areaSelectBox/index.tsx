@@ -1,6 +1,7 @@
 import { AreaItem } from "interface/shopInterface";
 import { PureComponent, ReactNode } from "react";
 import React from 'react'
+import style from './index.module.scss'
 interface Props{
     areaList:Array<AreaItem>
     onSelectCity:(areaId:number)=>void;
@@ -27,7 +28,7 @@ export default class AreaSelectBox extends PureComponent<Props,State>{
           return <div/>
         }
         return (
-        <div className="select">
+        <div className={style.container}>
         <select
           value={selectedOption}
           onChange={(event) =>

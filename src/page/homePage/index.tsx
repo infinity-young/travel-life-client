@@ -5,7 +5,6 @@ import FrontBlockContainer  from "../../container/frontBlockContainer/index.tsx"
 import { initHomePage } from "../../store/actions/homePage.ts";
 import { connect } from "react-redux";
 import { RouteComponentProps } from 'react-router-dom';
-import styles from './index.module.scss'
 
 
 
@@ -37,7 +36,7 @@ export  class HomePage extends PureComponent<RouteComponentProps&Props>{
           <div className='title-text'>Travel Life</div>
            <div >
              <HeadLine/>
-             <button onClick={() => this.goToShopListpage()} className={styles.button}>全部商店</button>
+             <button onClick={() => this.goToShopListpage()} >全部商店</button>
              <FrontBlockContainer onItemClick={this.goToShopListpage}/>
             </div>
         </div>

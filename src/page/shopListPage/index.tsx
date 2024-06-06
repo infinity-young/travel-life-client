@@ -41,6 +41,7 @@ export  class ShopListPage extends PureComponent<RouteProps&Props>{
             }
             return newItem
         })
+        categoryList.unshift({categoryId:-1,categoryName:'全部类别'})
         return categoryList
     }
     onClickCategory=(categoryId:number)=>{
