@@ -54,17 +54,31 @@ export class  ShopPage extends PureComponent<Props>{
 
         return(
             <div className={style.shopPageContainer} >
-                <NavigationBar title={shopName}/>
-               <div>
-                    <img src={IMAGE_PATH+shopImg}/>
-                    <span>{shopDesc}</span>
-                    <span>{shopAddr}</span>
-                    <span>{phone}</span>
-                </div>
-                <SearchBox search={this.onKeywordSearch}/>
-                <Category categoryList={categoryList} onClickCategory={this.onClickCategory}/>
                 <div>
-                <ProductList/>
+                    <NavigationBar />
+                    <div className='title-text'>{shopName}</div>
+                    <div className={style.card}>
+                        <img src={IMAGE_PATH+shopImg}/>
+                        <div className={style.titleContentContainer}>
+                            <div className={style.itemContainer}>
+                                <div className={style.title}>店铺类型</div>
+                                <div className={style.value}>{shopDesc}</div>
+                            </div>
+                            <div className={style.itemContainer}>
+                                <div className={style.title}>店铺地址</div>
+                                <div className={style.value}>{shopAddr}</div>
+                            </div>
+                            <div className={style.itemContainer}>
+                                <div className={style.title}>联系方式</div>
+                                <div className={style.value}>{phone}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <SearchBox search={this.onKeywordSearch}/>
+                    <Category categoryList={categoryList} onClickCategory={this.onClickCategory}/>
+                </div>
+                <div>
+                    <ProductList/>
                 </div>
             </div>
         )
