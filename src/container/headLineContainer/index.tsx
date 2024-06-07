@@ -51,7 +51,7 @@ export class HeadLine extends React.Component<Props,State>{
                  <img
                     key={index}
                     src={IMAGE_PATH+item.lineImg}
-                    className={index===currentImageIndex?styles.active:styles.hidden}
+                    className={index === currentImageIndex ? styles.active : styles.hidden}     
                />
               </a>)
             })}
