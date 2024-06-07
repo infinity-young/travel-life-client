@@ -59,10 +59,10 @@ export  class ShopListPage extends PureComponent<RouteProps&Props>{
         const {shopCategoryList=[],areaList=[]}=this.props;
         const categoryList=this.dealWithShopCategoryList(shopCategoryList);
        return(
-        <div className={style.pageContainer}>
+           <div className={style.pageContainer}>
+            <NavigationBar history={this.props.history} />
+            <div className='title-text'>商店列表</div>
             <div className={style.contentContainer}>
-               <NavigationBar history={this.props.history} />
-               <div className='title-text'>商店列表</div>
                <SearchBox search={this.onKeywordSearch} placeholder='请输入酒店名称'/>
                <Category categoryList={categoryList} onClickCategory={this.onClickCategory}/>
                <AreaSelectBox areaList={areaList} onSelectCity={this.onSelectCity}/>  

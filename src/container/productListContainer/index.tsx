@@ -8,6 +8,7 @@ import { withRouter,RouteComponentProps } from 'react-router-dom';
 import { List, AutoSizer, InfiniteLoader } from 'react-virtualized';
 import { productItemInterface } from "../../interface/productInterface.ts";
 import { getShopPageList } from "../../store/actions/shopPage.ts";
+import style from './index.module.scss'
 
 
 interface Props extends RouteComponentProps{
@@ -49,9 +50,13 @@ class ProductList extends PureComponent<Props,State>{
         this.setState({
           isLoading: true,
           pageIndex:this.state.pageIndex+1
+        }, () => {
+          this.props.loadMoreListData({ goodsListParam: { pageIndex: this.state.pageIndex } });
+          this.setState({
+           ... this.state,
+            isLoading: false,
+          })
         });
-         //发起请求，但是要如何感知请求已经返回来将isLoading设置为false呢？(在数据返回组件更新时)//goodsListParam
-        this.props.loadMoreListData({goodsListParam:{pageIndex:this.state.pageIndex}});
       }
       isRowLoaded({ index }) {
         // 判断当前行是否已经加载
@@ -59,12 +64,18 @@ class ProductList extends PureComponent<Props,State>{
 
       }
     
-      rowRenderer({ index, key, style }) {
+  rowRenderer({ index, key }) {
         // 渲染每一行的内容
-        const item = this.dealListData(this.state.listdata[index]);
+       const item = this.dealListData(this.state.listdata[index]);
+       if (index === this.props.count) {
+        return (
+            <div className={style.last}  key={key}>我是有底线的^_^</div>
+        );
+
+        }
     
         return (
-          <div key={key} style={style}>
+          <div key={key}>
            <PoiCell 
                     title={item.title} 
                     desc={item.desc} 
@@ -76,11 +87,7 @@ class ProductList extends PureComponent<Props,State>{
           </div>
         );
       }
-      // shouldComponentUpdate(nextProps: Readonly<Props>): boolean {
-      //     //如果列表数据变长了应该刷新页面
-      //     return nextProps.productList?.length!==this.props.productList?.length;
 
-      // }
       componentDidUpdate() {
           //刷新页面的时候更新列表项的配置
           this.setState(
@@ -108,7 +115,7 @@ class ProductList extends PureComponent<Props,State>{
         this.props.history.push(`/goodsdetailpage/${id}`);
     }
     render(): ReactNode {
-        const {productList=[]}=this.props;
+      const { productList = [] } = this.props;
         if(productList===null||productList.length==0){
             return <div/>
         }
@@ -123,12 +130,13 @@ class ProductList extends PureComponent<Props,State>{
                 {() => (
                   <List
                     height={window.innerHeight*0.7}
-                    width={window.innerWidth}
-                    rowCount={this.state.hasNextPage ? this.state.listdata.length + 1 : this.state.listdata.length}
+                    width={window.innerWidth*0.96}
+                    rowCount={this.state.hasNextPage ? this.state.listdata.length + 2 : this.state.listdata.length+1}
                     rowHeight={310}
                     rowRenderer={this.rowRenderer}
                     onRowsRendered={onRowsRendered}
                     ref={registerChild}
+                    className={style.listContainer}
                   />
                 )}
               </AutoSizer>

@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 import { withRouter } from 'react-router-dom';
 import { List, AutoSizer, InfiniteLoader } from 'react-virtualized';
 import { getShopListPageListData } from "../../store/actions/shopListPage.ts";
+import style from './index.module.scss'
 
 
 interface Props{
@@ -74,11 +75,6 @@ class ShopList extends PureComponent<Props,State>{
                     />
         );
       }
-      // shouldComponentUpdate(nextProps: Readonly<Props>): boolean {
-      //     //如果列表数据变长了应该刷新页面
-      //     return nextProps.shopList?.length!==this.props.shopList?.length;
-
-      // }
       componentDidUpdate() {
           //刷新页面的时候更新列表项的配置
           this.setState(
@@ -122,12 +118,13 @@ class ShopList extends PureComponent<Props,State>{
                 {() => (
                   <List
                     height={window.innerHeight*0.72}
-                    width={window.innerWidth}
+                    width={window.innerWidth*0.96}
                     rowCount={this.state.hasNextPage ? this.state.listdata.length + 1 : this.state.listdata.length}
                     rowHeight={310}
                     rowRenderer={this.rowRenderer}
                     onRowsRendered={onRowsRendered}
                     ref={registerChild}
+                    className={style.listContainer}
                   />
                 )}
               </AutoSizer>
