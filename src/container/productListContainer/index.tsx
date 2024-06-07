@@ -117,18 +117,20 @@ class ProductList extends PureComponent<Props,State>{
             isRowLoaded={this.isRowLoaded}
             loadMoreRows={this.loadMoreItems}
             rowCount={this.state.hasNextPage ? this.state.listdata.length + 1 : this.state.listdata.length}
+            style={{backgroundColor: 'red'}}
           >
             {({ onRowsRendered, registerChild }) => (
-              <AutoSizer>
+              <AutoSizer  style={{backgroundColor: 'red'}}>
                 {() => (
                   <List
-                    height={window.innerHeight}
+                    height={800}
                     width={window.innerWidth}
                     rowCount={this.state.hasNextPage ? this.state.listdata.length + 1 : this.state.listdata.length}
-                    rowHeight={200}
+                    rowHeight={310}
                     rowRenderer={this.rowRenderer}
                     onRowsRendered={onRowsRendered}
                     ref={registerChild}
+                    style={{backgroundColor: 'red'}}
                   />
                 )}
               </AutoSizer>

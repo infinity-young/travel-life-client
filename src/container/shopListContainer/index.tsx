@@ -59,21 +59,19 @@ class ShopList extends PureComponent<Props,State>{
 
       }
     
-      rowRenderer({ index, key, style }) {
+      rowRenderer=({ index, key })=>{
         // 渲染每一行的内容
         const item = this.dealListData(this.state.listdata[index]);
-    
         return (
-          <div key={key} style={style}>
            <PoiCell 
                     title={item.title} 
                     desc={item.desc} 
                     img={item.img} 
                     id={item.id}
+                    addr={item.addr}
                     key={key}
                     onClickPoi={this.onCellClick}
                     />
-          </div>
         );
       }
       // shouldComponentUpdate(nextProps: Readonly<Props>): boolean {
@@ -100,7 +98,8 @@ class ShopList extends PureComponent<Props,State>{
                 title:shopListItem.shopName,
                 desc:shopListItem.shopDesc,
                 img:IMAGE_PATH+shopListItem.shopImg,
-                id:shopListItem.shopId
+                id: shopListItem.shopId,
+                addr:shopListItem.shopAddr
             }
         return newItem;
     }
@@ -122,10 +121,10 @@ class ShopList extends PureComponent<Props,State>{
               <AutoSizer>
                 {() => (
                   <List
-                    height={600}
+                    height={window.innerHeight*0.72}
                     width={window.innerWidth}
                     rowCount={this.state.hasNextPage ? this.state.listdata.length + 1 : this.state.listdata.length}
-                    rowHeight={200}
+                    rowHeight={310}
                     rowRenderer={this.rowRenderer}
                     onRowsRendered={onRowsRendered}
                     ref={registerChild}

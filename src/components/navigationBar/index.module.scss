@@ -6,7 +6,7 @@
     background-image: url('../../../images/back_gray_icon.png');
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: -25px;
     border: none;
     cursor: pointer;
     width: 100px;
@@ -14,5 +14,10 @@
     background-color: transparent;
   }
   .back:active {
+    background-color: transparent;
+    box-shadow: revert;
+    transform: revert;
+  }
+  .back:hover {
     background-color: transparent;
   }

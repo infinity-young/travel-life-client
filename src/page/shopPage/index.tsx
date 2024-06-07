@@ -11,6 +11,7 @@ import {getShopPageList} from '../../store/actions/shopPage.ts'
 import ProductList from '../../container/productListContainer/index.tsx'
 import NavigationBar from "../../components/navigationBar/index.tsx";
 import { IMAGE_PATH } from "../../config/imageConfig.ts";
+import style from './index.module.scss'
 
 interface Props{
     initShopPage:(shopId:number)=>void;
@@ -52,7 +53,7 @@ export class  ShopPage extends PureComponent<Props>{
         const {shopName,shopImg,shopDesc,shopAddr,phone}=shop;
 
         return(
-            <div>
+            <div className={style.shopPageContainer} >
                 <NavigationBar title={shopName}/>
                <div>
                     <img src={IMAGE_PATH+shopImg}/>
@@ -62,7 +63,9 @@ export class  ShopPage extends PureComponent<Props>{
                 </div>
                 <SearchBox search={this.onKeywordSearch}/>
                 <Category categoryList={categoryList} onClickCategory={this.onClickCategory}/>
+                <div>
                 <ProductList/>
+                </div>
             </div>
         )
     }

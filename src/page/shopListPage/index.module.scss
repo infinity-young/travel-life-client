@@ -1,8 +1,14 @@
+.pageContainer{
+    display: block;
+    padding-left: 2%;
+    padding-right: 2%;
+}
 .contentContainer{
-    background-color: aqua;
-    width: 50%;
-    height: 100%;
+    width: 100%;
+    height: 20%;
 }
 .listContainer{
-    height: 600px;
+    display: flex;
+    height: 72%;
+    width: 100%;
 }
