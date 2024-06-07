@@ -74,7 +74,7 @@ export class  ShopPage extends PureComponent<Props>{
                             </div>
                         </div>
                     </div>
-                    <SearchBox search={this.onKeywordSearch}/>
+                    <SearchBox search={this.onKeywordSearch} placeholder='请输入房型名称'/>
                     <Category categoryList={categoryList} onClickCategory={this.onClickCategory}/>
                 </div>
                 <div>

@@ -63,7 +63,7 @@ export  class ShopListPage extends PureComponent<RouteProps&Props>{
             <div className={style.contentContainer}>
                <NavigationBar history={this.props.history} />
                <div className='title-text'>商店列表</div>
-               <SearchBox search={this.onKeywordSearch}/>
+               <SearchBox search={this.onKeywordSearch} placeholder='请输入酒店名称'/>
                <Category categoryList={categoryList} onClickCategory={this.onClickCategory}/>
                <AreaSelectBox areaList={areaList} onSelectCity={this.onSelectCity}/>  
             </div>

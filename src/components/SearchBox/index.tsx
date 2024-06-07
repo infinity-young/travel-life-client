@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react';
 import style from './index.module.scss'
 interface SearchBoxProps{
-    search:(searchValue:string)=>void;
+  search: (searchValue: string) => void;
+  placeholder: string;
 }
 interface SearchBoxState{
     searchValue:string;
@@ -29,7 +30,7 @@ class SearchBox extends PureComponent<SearchBoxProps,SearchBoxState>{
     const { searchValue } = this.state;
     return (
       <div className={style.searchContainer}>
-        <input type="text" value={searchValue} onChange={this.handleInputChange} className={style.inputBox} placeholder='请输入酒店名称' />
+        <input type="text" value={searchValue} onChange={this.handleInputChange} className={style.inputBox} placeholder={this.props.placeholder} />
         <button onClick={this.handleSearch} >搜索</button>
       </div>
     );
