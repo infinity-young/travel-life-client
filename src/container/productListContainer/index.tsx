@@ -37,13 +37,13 @@ class ProductList extends PureComponent<Props,State>{
         this.isRowLoaded = this.isRowLoaded.bind(this);
         this.rowRenderer = this.rowRenderer.bind(this);
     }
-    componentDidMount() {
-        // 初始化加载第一页数据
-        this.loadMoreItems();
-      }
     
-      loadMoreItems() {
+  loadMoreItems() {
         if (this.state.isLoading || !this.state.hasNextPage) {
+          this.setState({
+            ... this.state,
+             isLoading: false,
+           })
           return;
         }
         // 设置isLoading为true，表示正在加载数据
@@ -52,10 +52,6 @@ class ProductList extends PureComponent<Props,State>{
           pageIndex:this.state.pageIndex+1
         }, () => {
           this.props.loadMoreListData({ goodsListParam: { pageIndex: this.state.pageIndex } });
-          this.setState({
-           ... this.state,
-            isLoading: false,
-          })
         });
       }
       isRowLoaded({ index }) {
@@ -81,7 +77,6 @@ class ProductList extends PureComponent<Props,State>{
                     desc={item.desc} 
                     img={item.img} 
                     id={item.id}
-                    key={key}
                     onClickPoi={this.onCellClick}
                     />
           </div>
@@ -123,7 +118,7 @@ class ProductList extends PureComponent<Props,State>{
             <InfiniteLoader
             isRowLoaded={this.isRowLoaded}
             loadMoreRows={this.loadMoreItems}
-            rowCount={this.state.hasNextPage ? this.state.listdata.length + 1 : this.state.listdata.length}
+            rowCount={this.state.hasNextPage ? this.state.listdata.length + 1 : this.state.listdata.length+0}
           >
             {({ onRowsRendered, registerChild }) => (
               <AutoSizer>
@@ -131,7 +126,7 @@ class ProductList extends PureComponent<Props,State>{
                   <List
                     height={window.innerHeight*0.7}
                     width={window.innerWidth*0.96}
-                    rowCount={this.state.hasNextPage ? this.state.listdata.length + 2 : this.state.listdata.length+1}
+                    rowCount={this.state.hasNextPage ? this.state.listdata.length + 1 : this.state.listdata.length+0}
                     rowHeight={310}
                     rowRenderer={this.rowRenderer}
                     onRowsRendered={onRowsRendered}

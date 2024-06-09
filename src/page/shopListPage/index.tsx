@@ -68,7 +68,7 @@ export  class ShopListPage extends PureComponent<RouteProps&Props>{
                <AreaSelectBox areaList={areaList} onSelectCity={this.onSelectCity}/>  
             </div>
              <div className={style.listContainer}>
-                <ShopList/>
+                   <ShopList/>
             </div>
         </div>
        )

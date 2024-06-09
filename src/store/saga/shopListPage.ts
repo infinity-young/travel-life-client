@@ -27,7 +27,7 @@ function *initShopListPage(action){
 
 function *fetchShopListPageListData(action){
     const {listParams }=action?.payload||{};
-    const {isLoadMore=false}=action?.payload||{};
+    const { isLoadMore = false,callback } = action?.payload || {};
     const listRequestParam = yield select(state => state.shopListPageReducer.shopListPageData.listRequestParam);
     const requestParams:ListParamsType={
         ...listRequestParam,
@@ -36,14 +36,14 @@ function *fetchShopListPageListData(action){
      //请求店铺列表页筛选框数据
      const data = yield call(Request,SHOP_LIST_PAGE_LIST_PATH,requestParams);
      //将店铺列表页筛选框数据写入到store
-     if(isLoadMore&&data?.data){
-     //将请求回的数据拼接到store中
-     const shopList = yield select(state => state.shopListPageReducer.shopListPageData.listData.shopList);
-     const shopListNew=shopList.concat(data.data.shopList);
-     const listData={...data.data,shopList:shopListNew}
-     yield put(yield call(setShopListPageListData,listData));
+    if (isLoadMore&&data?.data?.success) {
+        //将请求回的数据拼接到store中
+        const shopList = yield select(state => state.shopListPageReducer.shopListPageData.listData.shopList);
+        const shopListNew=shopList.concat(data.data.shopList);
+        const listData={...data.data,shopList:shopListNew}
+        yield put(yield call(setShopListPageListData, listData));
      }
-     else if(data?.data){
+     else if(data?.data?.success){
          yield put(yield call(setShopListPageListData,data.data));
      }
 }

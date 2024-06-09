@@ -7,84 +7,122 @@ import React from 'react';
 import { connect } from "react-redux";
 import { withRouter } from 'react-router-dom';
 import { List, AutoSizer, InfiniteLoader } from 'react-virtualized';
-import { getShopListPageListData } from "../../store/actions/shopListPage.ts";
-import style from './index.module.scss'
+import { getShopListPageListData, setShopListPageListData } from "../../store/actions/shopListPage.ts";
+import styles from './index.module.scss'
 
 
 interface Props{
     shopList:Array<ShopItemInterface>,
     count:number,
-    loadMoreListData:(params)=>void
+    loadMoreListData: (params) => void
+    setShopListPageListDataInit:()=>void
 }
 
 interface State{
-    listdata:Array<ShopItemInterface>,
     isLoading:boolean,
-    hasNextPage:boolean,
     pageIndex:number
 }
 
-class ShopList extends PureComponent<Props,State>{
-    constructor(props){
-        super(props)
-        this.state={
-            listdata:this.props.shopList,
-            isLoading:false,
-            hasNextPage:this.props.shopList?.length<this.props.count,
-            pageIndex:1
-        }
-        this.loadMoreItems = this.loadMoreItems.bind(this);
-        this.isRowLoaded = this.isRowLoaded.bind(this);
-        this.rowRenderer = this.rowRenderer.bind(this);
+class ShopList extends PureComponent<Props, State> {
+  resolveLoadMorePromise;
+  rejectLoadMorePromise;
+  constructor(props) {
+    super(props)
+    this.state = {
+      isLoading: false,
+      pageIndex: 1
     }
-    componentDidMount() {
-        // 初始化加载第一页数据
-        this.loadMoreItems();
-      }
-    
-      loadMoreItems() {
-        if (this.state.isLoading || !this.state.hasNextPage) {
-          return;
+  }
+  loadMoreItems = () => {
+      // 创建一个新的 Promise
+      return new Promise((resolve, reject) => {
+        // 检查是否已经在加载数据或没有更多数据
+        if (this.state.isLoading) {
+          resolve(false);
         }
-        // 设置isLoading为true，表示正在加载数据
-        this.setState({
-          isLoading: true,
-          pageIndex:this.state.pageIndex+1
-        });
-         //发起请求，但是要如何感知请求已经返回来将isLoading设置为false呢？(在数据返回组件更新时)
-        this.props.loadMoreListData({pageIndex:this.state.pageIndex});
-      }
-      isRowLoaded({ index }) {
-        // 判断当前行是否已经加载
-        return !!this.state.listdata[index];
-
-      }
+        else if (!(this.props.shopList?.length<this.props.count)) {
+          this.setState(prevState => ({
+            ...prevState,
+            isLoading: false,
+          }));
+        resolve(false);
+        } else {
+        // 设置 isLoading 状态为 true
+        this.setState(prevState => ({
+          ...prevState,
+          isLoading: true
+        }));
+          // 调用 store 中的 loadMoreListData 函数，并传入参数和 callback
+          this.props.loadMoreListData({
+            listParams: { pageIndex: this.state.pageIndex+1 },       
+          });  
+          this.resolveLoadMorePromise = resolve;
+          this.rejectLoadMorePromise = reject;
+        }
     
-      rowRenderer=({ index, key })=>{
-        // 渲染每一行的内容
-        const item = this.dealListData(this.state.listdata[index]);
-        return (
-           <PoiCell 
-                    title={item.title} 
-                    desc={item.desc} 
-                    img={item.img} 
-                    id={item.id}
-                    addr={item.addr}
-                    key={key}
-                    onClickPoi={this.onCellClick}
-                    />
-        );
+      });
+    };
+  componentWillUnmount() {
+    // 清理promise的引用
+    this.resolveLoadMorePromise = null;
+    this.rejectLoadMorePromise = null;
+    //清除列表数据缓存
+    this.props.setShopListPageListDataInit();
+  }
+    
+  isRowLoaded = ({ index }) => {
+    // 判断当前行是否已经加载
+    return !!this.props.shopList[index];
+
+  }
+    
+  rowRenderer = ({ index, key,style }) => {
+    // 渲染每一行的内容
+    const item = this.dealListData(this.props.shopList[index]);
+    if (index > this.props.count-1) {
+      return (
+        <div key={key} style={style}>
+          <div className={styles.last} >我是有底线的^_^</div>
+        </div>
+          
+      );
+    }
+    return (
+      <div key={key} style={style}>
+        <PoiCell
+          title={item.title}
+          desc={item.desc}
+          img={item.img}
+          id={item.id}
+          addr={item.addr}
+          onClickPoi={this.onCellClick}
+        />
+      </div>
+    );
+  }
+  componentDidUpdate(prevProps) {
+        // //刷新页面的时候更新列表项的配置
+        this.setState(prevState => ({
+          ...prevState,
+          isLoading:false,
+    }));
+      // 如果接收到新的列表数据，则决议 Promise
+      if (this.props.shopList.length > prevProps.shopList.length) {
+        if (this.resolveLoadMorePromise) {
+          this.resolveLoadMorePromise();
+          this.resolveLoadMorePromise = null;
+        }
       }
-      componentDidUpdate() {
-          //刷新页面的时候更新列表项的配置
-          this.setState(
-            {
-                listdata:this.props.shopList,
-                isLoading:false,
-                hasNextPage:this.props.shopList?.length<this.props.count,
-            }
-          )
+      // 如果发生了错误，则根据实际情况处理（例如，显示错误信息）
+      if (this.props.error && this.props.error !== prevProps.error) {
+        // 处理错误情况
+        if (this.rejectLoadMorePromise) {
+          this.rejectLoadMorePromise();
+          this.rejectLoadMorePromise = null;
+        }
       }
+    }
+
 
     dealListData=(shopListItem:ShopItemInterface)=>{
         if(!shopListItem){
@@ -107,24 +145,25 @@ class ShopList extends PureComponent<Props,State>{
         if(shopList===null||shopList.length==0){
             return <div/>
         }
+      const rowCount =  this.props.count+1;
         return (
             <InfiniteLoader
             isRowLoaded={this.isRowLoaded}
             loadMoreRows={this.loadMoreItems}
-            rowCount={this.state.hasNextPage ? this.state.listdata.length + 1 : this.state.listdata.length}
+            rowCount={rowCount}
           >
             {({ onRowsRendered, registerChild }) => (
               <AutoSizer>
                 {() => (
                   <List
-                    height={window.innerHeight*0.72}
+                    height={innerHeight*0.7}
                     width={window.innerWidth*0.96}
-                    rowCount={this.state.hasNextPage ? this.state.listdata.length + 1 : this.state.listdata.length}
-                    rowHeight={310}
+                    rowCount={rowCount}
+                    rowHeight={306}
                     rowRenderer={this.rowRenderer}
                     onRowsRendered={onRowsRendered}
                     ref={registerChild}
-                    className={style.listContainer}
+                    className={styles.listContainer}
                   />
                 )}
               </AutoSizer>
@@ -144,7 +183,8 @@ const mapStateToProps=(state)=>{
 }
 const mapDispatchToProps=(dispatch)=>{
     return{
-        loadMoreListData:(params)=>dispatch(getShopListPageListData({isLoadMore:true,...params}))
+      loadMoreListData: (params) => dispatch(getShopListPageListData({ isLoadMore: true, ...params })),
+      setShopListPageListDataInit:()=>dispatch(setShopListPageListData({listData:{ShopList:[],count:0}}))
     }
 }
 export default withRouter(connect(mapStateToProps,mapDispatchToProps)(ShopList))
