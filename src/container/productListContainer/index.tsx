@@ -114,7 +114,7 @@ class ProductList extends PureComponent<Props,State>{
             return <div className={styles.noContent}>数据为空</div>
         }
       const rowCount = this.props.count + 1
-      const listKey=productList[0].productId
+      const listKey = JSON.stringify(productList);
         return (
             <InfiniteLoader
             isRowLoaded={this.isRowLoaded}
