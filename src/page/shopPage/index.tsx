@@ -36,7 +36,7 @@ export class  ShopPage extends PureComponent<Props>{
         this.props.getShopPageListData({goodsListParam:{productName:searchValue,pageIndex:1}})
     }
     onClickCategory=(categoryId:number)=>{
-        this.props.getShopPageListData({goodsListParam:{productCategoryId:categoryId,pageSize:1}})
+        this.props.getShopPageListData({goodsListParam:{productCategoryId:categoryId,pageIndex:1}})
     }
     dealWithProductCategoryList=( productCategoryList:Array<productCategoryInterface>)=>{
         const categoryList=productCategoryList.map((item)=>{
