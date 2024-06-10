@@ -9,6 +9,8 @@ import { withRouter } from 'react-router-dom';
 import { List, AutoSizer, InfiniteLoader } from 'react-virtualized';
 import { getShopListPageListData } from "../../store/actions/shopListPage.ts";
 import styles from './index.module.scss'
+import isEqual from 'lodash/isEqual';
+
 
 
 interface Props{
@@ -23,8 +25,8 @@ interface State{
 }
 
 class ShopList extends PureComponent<Props, State> {
-  resolveLoadMorePromise;
-  rejectLoadMorePromise;
+  private resolveLoadMorePromise;
+  private rejectLoadMorePromise;
   constructor(props) {
     super(props)
     this.state = {
@@ -98,13 +100,13 @@ class ShopList extends PureComponent<Props, State> {
     );
   }
   componentDidUpdate(prevProps) {
-        // //刷新页面的时候更新列表项的配置
-        this.setState(prevState => ({
-          ...prevState,
-          isLoading:false,
-    }));
+      // //刷新页面的时候更新列表项的配置
+      this.setState(prevState => ({
+        ...prevState,
+        isLoading:false,
+      }));
       // 如果接收到新的列表数据，则决议 Promise
-      if (this.props.shopList.length > prevProps.shopList.length) {
+      if (!isEqual(this.props.shopList, prevProps.shopList)) {
         if (this.resolveLoadMorePromise) {
           this.resolveLoadMorePromise();
           this.resolveLoadMorePromise = null;
