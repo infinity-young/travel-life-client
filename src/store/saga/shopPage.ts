@@ -2,7 +2,7 @@ import { SHOP_DETAIL_PAGE_INFO_PATH, SHOP_PRODUCT_PATH } from '../../config/requ
 import { ShopPageTypes } from '../../config/actionConfig'
 import { all, call, put, select, takeEvery } from 'redux-saga/effects'
 import {Request} from '../../request/index.ts'
-import { getShopPageInfo, getShopPageList, setShopId, setShopPageInfo, setShopPageList } from '../../store/actions/shopPage';
+import { getShopPageInfo, getShopPageList, setShopProductRequestParams, setShopPageInfo, setShopPageList } from '../../store/actions/shopPage';
 
 interface ShopInfoParam{
     shopId:number
@@ -18,7 +18,7 @@ interface GoodsListParam{
 function *initShopPage(action){
     //解析跳链传入参数
     const shopParmas:ShopInfoParam=action?.payload||{}
-    yield put(yield call(setShopId,shopParmas))
+    yield put(yield call(setShopProductRequestParams,shopParmas))
     //请求shopinfo
      yield put(yield call(getShopPageInfo,{shopInfoParam:{...shopParmas}}))
     //请求shoplist  
@@ -40,7 +40,9 @@ function *getShopPageListData(action?){
     const {isLoadMore=false}=action?.payload||{};
     const{goodsListParam}=action?.payload||{};
     //从store中获取请求参数
-    const listParams=yield select(state=>state.shopPageReducer.shopPageData.productListParam)
+    const listParams = yield select(state => state.shopPageReducer.shopPageData.productListParam)
+    yield put(yield call(setShopProductRequestParams,goodsListParam))
+
     //组合请求参数
     const requestParams:GoodsListParam={
         ...listParams,

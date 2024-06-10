@@ -45,3 +45,9 @@ export function setShopListAreaId(payload){
     payload
    }
 }
+
+export function resetShoplistState() {
+    return {
+        type:ShopListPageTypes.RESET_SHOPLIST_STATE
+    }
+}

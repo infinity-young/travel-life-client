@@ -3,7 +3,7 @@ import SearchBox from "../../components/searchBox";
 import { PureComponent, ReactNode } from "react";
 import React from 'react'
 import { connect } from "react-redux";
-import { initShopPage } from "../../store/actions/shopPage";
+import { initShopPage, resetShopState } from "../../store/actions/shopPage";
 import { productCategoryInterface, productItemInterface } from "../../interface/productInterface";
 import { ShopInfoInterface } from "../../interface/shopInterface";
 import { categoryItem } from "../../interface/commonInterface";
@@ -19,19 +19,24 @@ interface Props{
     shop:ShopInfoInterface;
     count:number;
     productList:Array<productItemInterface>;
-    getShopPageListData:(params?)=>void;
+    getShopPageListData: (params?) => void;
+    resetShopState:()=>void
 }
 export class  ShopPage extends PureComponent<Props>{
     constructor(props){
         super(props)
         const { shopId } = this.props.match.params;
+        console.log("====constructor========",this.props.productList)
         this.props.initShopPage(shopId)
     }
+    componentWillUnmount(){
+        this.props.resetShopState()
+    }
     onKeywordSearch=(searchValue:string)=>{
-        this.props.getShopPageListData({goodsListParam:{productName:searchValue}})
+        this.props.getShopPageListData({goodsListParam:{productName:searchValue,pageIndex:1}})
     }
     onClickCategory=(categoryId:number)=>{
-        this.props.getShopPageListData({goodsListParam:{productCategoryId:categoryId}})
+        this.props.getShopPageListData({goodsListParam:{productCategoryId:categoryId,pageIndex:1}})
     }
     dealWithProductCategoryList=( productCategoryList:Array<productCategoryInterface>)=>{
         const categoryList=productCategoryList.map((item)=>{
@@ -41,6 +46,7 @@ export class  ShopPage extends PureComponent<Props>{
             }
             return newItem
         })
+        categoryList.unshift({categoryId:-1,categoryName:'全部'})
         return categoryList
     }
     render(): ReactNode {
@@ -51,7 +57,7 @@ export class  ShopPage extends PureComponent<Props>{
         const{productCategoryList}=this.props;
         const categoryList=this.dealWithProductCategoryList(productCategoryList);
         const {shopName,shopImg,shopDesc,shopAddr,phone}=shop;
-
+        console.log("==render========",this.props.productCategoryList)
         return(
             <div className={style.shopPageContainer} >
                 <div>
@@ -108,7 +114,8 @@ const mapDispatchToProps=(dispatch)=>{
         initShopPage:(shopId)=>{ 
             const shopParams={shopId:shopId}
             dispatch(initShopPage(shopParams))},
-        getShopPageListData:(params)=>dispatch(getShopPageList(params))
+        getShopPageListData: (params) => dispatch(getShopPageList(params)),
+        resetShopState:()=>dispatch(resetShopState())
     }
 }
 

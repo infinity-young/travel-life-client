@@ -32,9 +32,14 @@ export function setShopPageList(payload){
         payload
     }
 }
-export function setShopId(payload){
+export function setShopProductRequestParams(payload){
     return{
-        type:ShopPageTypes.SET_SHOP_ID,
+        type:ShopPageTypes.SET_SHOP_PRODUCT_REQUEST_PARAMS,
         payload
+    }
+}
+export function resetShopState() {
+    return {
+        type:ShopPageTypes.RESET_SHOP_STATE,
     }
 }

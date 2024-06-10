@@ -18,7 +18,6 @@ interface Props extends RouteComponentProps{
 }
 
 interface State{
-    listdata:Array<productItemInterface>,
     isLoading:boolean,
     hasNextPage:boolean,
     pageIndex:number
@@ -28,7 +27,6 @@ class ProductList extends PureComponent<Props,State>{
     constructor(props){
         super(props)
         this.state={
-            listdata:this.props.productList,
             isLoading:false,
             hasNextPage:this.props.productList?.length<this.props.count,
             pageIndex:1
@@ -56,13 +54,13 @@ class ProductList extends PureComponent<Props,State>{
       }
       isRowLoaded({ index }) {
         // 判断当前行是否已经加载
-        return !!this.state.listdata[index];
+        return !!this.props.productList[index];
 
       }
     
   rowRenderer({ index, key,style }) {
         // 渲染每一行的内容
-       const item = this.dealListData(this.state.listdata[index]);
+       const item = this.dealListData(this.props.productList[index]);
        if (index === this.props.count) {
          return (
          <div key={key} style={style}>
@@ -89,7 +87,6 @@ class ProductList extends PureComponent<Props,State>{
           //刷新页面的时候更新列表项的配置
           this.setState(
             {
-                listdata:this.props.productList,
                 isLoading:false,
                 hasNextPage:this.props.productList?.length<this.props.count,
             }
@@ -114,9 +111,10 @@ class ProductList extends PureComponent<Props,State>{
     render(): ReactNode {
       const { productList = [] } = this.props;
         if(productList===null||productList.length==0){
-            return <div/>
+            return <div className={styles.noContent}>数据为空</div>
         }
-      const rowCount=this.state.listdata.length+1
+      const rowCount = this.props.count + 1
+      const listKey=productList[0].productId
         return (
             <InfiniteLoader
             isRowLoaded={this.isRowLoaded}
@@ -135,6 +133,7 @@ class ProductList extends PureComponent<Props,State>{
                     onRowsRendered={onRowsRendered}
                     ref={registerChild}
                     className={styles.listContainer}
+                    key={listKey}
                   />
                 )}
               </AutoSizer>

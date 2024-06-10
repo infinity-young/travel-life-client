@@ -7,7 +7,10 @@ const defaultStates = {
     productListData:{},
     productListParam:{
         pageIndex:1,
-        pageSize:2
+        pageSize: 2,
+        shopId: -1,
+        productCategoryId: -1,
+        productName:null
     }
    }
 };
@@ -27,7 +30,7 @@ const cases = {
         }
         return {...state,shopPageData:{...newShopListPageData}}
     },
-    [ShopPageTypes.SET_SHOP_ID]:(state,payload)=>{
+    [ShopPageTypes.SET_SHOP_PRODUCT_REQUEST_PARAMS]: (state, payload) => {
         const newShopListPageData={
             ...state.shopPageData,
             productListParam:{
@@ -36,6 +39,9 @@ const cases = {
             }
         }
         return {...state,shopPageData:{...newShopListPageData}}
+    },
+    [ShopPageTypes.RESET_SHOP_STATE]: () => {
+        return defaultStates;
     }
    
 };
