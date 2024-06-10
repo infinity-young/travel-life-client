@@ -27,7 +27,7 @@ const cases = {
         }
         return {...state,shopListPageData:{...newShopListPageData}}
     },
-    [ShopListPageTypes.SET_PARENT_ID]:(state,payload)=>{
+    [ShopListPageTypes.SET_PARENT_ID]: (state, payload) => {
         const newShopListPageData={
             ...state.shopListPageData,
             listRequestParam:{
@@ -39,7 +39,7 @@ const cases = {
             ...state, shopListPageData:{...newShopListPageData}
         }
     },
-    [ShopListPageTypes.SET_AREA_ID]:(state,payload)=>{
+    [ShopListPageTypes.SET_SHOPLIST_QUERY_PARAMS]: (state, payload) => {
         const newShopListPageData={
             ...state.shopListPageData,
             listRequestParam:{
@@ -50,6 +50,9 @@ const cases = {
         return{
             ...state, shopListPageData:{...newShopListPageData}
         }
+    },
+    [ShopListPageTypes.RESET_SHOPLIST_STATE]: () => {
+        return defaultStates
     }
 };
 

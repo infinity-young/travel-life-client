@@ -7,7 +7,7 @@ import React from 'react';
 import { connect } from "react-redux";
 import { withRouter } from 'react-router-dom';
 import { List, AutoSizer, InfiniteLoader } from 'react-virtualized';
-import { getShopListPageListData, setShopListPageListData } from "../../store/actions/shopListPage.ts";
+import { getShopListPageListData } from "../../store/actions/shopListPage.ts";
 import styles from './index.module.scss'
 
 
@@ -15,7 +15,6 @@ interface Props{
     shopList:Array<ShopItemInterface>,
     count:number,
     loadMoreListData: (params) => void
-    setShopListPageListDataInit:()=>void
 }
 
 interface State{
@@ -66,8 +65,6 @@ class ShopList extends PureComponent<Props, State> {
     // 清理promise的引用
     this.resolveLoadMorePromise = null;
     this.rejectLoadMorePromise = null;
-    //清除列表数据缓存
-    this.props.setShopListPageListDataInit();
   }
     
   isRowLoaded = ({ index }) => {
@@ -142,8 +139,8 @@ class ShopList extends PureComponent<Props, State> {
     }
     render(): ReactNode {
         const {shopList=[]}=this.props;
-        if(shopList===null||shopList.length==0){
-            return <div/>
+      if (shopList === null || shopList.length == 0) {
+        return <div className={styles.noContent}>数据为空</div>
         }
       const rowCount = this.props.count + 1;
       const listKey=shopList[0].shopDesc
@@ -164,7 +161,6 @@ class ShopList extends PureComponent<Props, State> {
                  rowRenderer={this.rowRenderer}
                  onRowsRendered={onRowsRendered}
                  ref={registerChild}
-                 className={styles.listContainer}
                  key={listKey}
                  />
                 )}
@@ -186,7 +182,6 @@ const mapStateToProps=(state)=>{
 const mapDispatchToProps=(dispatch)=>{
     return{
       loadMoreListData: (params) => dispatch(getShopListPageListData({ isLoadMore: true, ...params })),
-      setShopListPageListDataInit:()=>dispatch(setShopListPageListData({listData:{ShopList:[],count:0}}))
     }
 }
 export default withRouter(connect(mapStateToProps,mapDispatchToProps)(ShopList))

@@ -18,7 +18,7 @@ export const ShopListPageTypes = createActionTypes(
         INIT_SHOP_LIST_PAGE:null,
         RESET_SHOPLIST_STATE:null,
         SET_PARENT_ID:null,
-        SET_AREA_ID:null
+        SET_SHOPLIST_QUERY_PARAMS: null,
     },
     'shoplistpage'
 );

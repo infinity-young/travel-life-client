@@ -132,7 +132,6 @@ class ProductList extends PureComponent<Props,State>{
                     rowRenderer={this.rowRenderer}
                     onRowsRendered={onRowsRendered}
                     ref={registerChild}
-                    className={styles.listContainer}
                     key={listKey}
                   />
                 )}

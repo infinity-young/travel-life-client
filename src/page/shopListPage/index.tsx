@@ -2,7 +2,7 @@ import { PureComponent } from "react";
 import React from "react";
 import { withRouter, RouteProps } from 'react-router-dom';
 import { connect, ConnectedProps } from 'react-redux';
-import { getShopListPageListData, initShopListPage, setShopListAreaId, setShopListParentId } from "../../store/actions/shopListPage.ts";
+import { getShopListPageListData, initShopListPage, resetShoplistState } from "../../store/actions/shopListPage.ts";
 import SearchBox from "../../components/searchBox/index.tsx";
 import { AreaItem, ShopCategoryItemInterface } from "interface/shopInterface.ts";
 import AreaSelectBox from "../../components/areaSelectBox/index.tsx";
@@ -17,8 +17,7 @@ interface  ShopListPageProps{
     shopCategoryList:Array<ShopCategoryItemInterface>;
     areaList:Array<AreaItem>;
     refreshList:(params?)=>void;
-    setParentId:(params)=>void;
-    setCityId:(params)=>void;
+    resetShoplistState: () => void;
 }
 
 type Props = RouteProps<string> & PropsFromRedux&ShopListPageProps;
@@ -29,6 +28,9 @@ export  class ShopListPage extends PureComponent<RouteProps&Props>{
         super(props)
         const { parentId } = this.props.match.params;
         this.props.initShopListPage(parentId)
+    }
+    componentWillUnmount(){
+        this.props.resetShoplistState();
     }
     dealWithShopCategoryList=( shopCategoryList:Array<ShopCategoryItemInterface>)=>{
         if(shopCategoryList===null||shopCategoryList?.length===0){
@@ -45,15 +47,13 @@ export  class ShopListPage extends PureComponent<RouteProps&Props>{
         return categoryList
     }
     onClickCategory=(categoryId:number)=>{
-        this.props.setParentId({parentId:categoryId})
-        this.props.refreshList()
+        this.props.refreshList({listParams:{parentId:categoryId,pageIndex:1}})
     }
     onSelectCity=(areaId:number)=>{
-        this.props.setCityId({areaId:areaId})
-        this.props.refreshList()
+        this.props.refreshList({listParams:{areaId:areaId,pageIndex:1}})
     }
     onKeywordSearch=(searchValue:string)=>{
-        this.props.refreshList({listParams:{shopName:searchValue}})
+        this.props.refreshList({listParams:{shopName:searchValue,}})
     }
     render(){
         const {shopCategoryList=[],areaList=[]}=this.props;
@@ -87,9 +87,8 @@ const mapDispatchToProps=dispatch=>{
             const listParams={parentId:parentId}
             dispatch(initShopListPage(listParams));
         },
-        setParentId:(params)=>{dispatch(setShopListParentId(params))},
-        setCityId:(params)=>{dispatch(setShopListAreaId(params))},
-        refreshList:(params?)=>{dispatch(getShopListPageListData(params))} 
+        refreshList: (params?) => { dispatch(getShopListPageListData(params)) },
+        resetShoplistState:()=>{dispatch(resetShoplistState())}
     }
 }
   

@@ -39,9 +39,9 @@ export function setShopListParentId(payload){
         payload
     }
 }
-export function setShopListAreaId(payload){
+export function setShopListQueryParams(payload){
    return{
-    type:ShopListPageTypes.SET_AREA_ID,
+    type:ShopListPageTypes.SET_SHOPLIST_QUERY_PARAMS,
     payload
    }
 }
