@@ -9,54 +9,44 @@ import { List, AutoSizer, InfiniteLoader } from 'react-virtualized';
 import { productItemInterface } from "../../interface/productInterface.ts";
 import { getShopPageList } from "../../store/actions/shopPage.ts";
 import styles from './index.module.scss'
+import isEqual from 'lodash/isEqual';
+
 
 
 interface Props extends RouteComponentProps{
     productList:Array<productItemInterface>,
-    count:number,
+    count: number,
+    pageIndex:number,
     loadMoreListData:(params)=>void
 }
 
-interface State{
-    isLoading:boolean,
-    hasNextPage:boolean,
-    pageIndex:number
-}
-
-class ProductList extends PureComponent<Props,State>{
+class ProductList extends PureComponent<Props>{
+  private resolveLoadMorePromise;
+  private rejectLoadMorePromise;
     constructor(props){
         super(props)
-        this.state={
-            isLoading:false,
-            hasNextPage:this.props.productList?.length<this.props.count,
-            pageIndex:1
-        }
         this.loadMoreItems = this.loadMoreItems.bind(this);
         this.isRowLoaded = this.isRowLoaded.bind(this);
         this.rowRenderer = this.rowRenderer.bind(this);
     }
     
   loadMoreItems() {
-        if (this.state.isLoading || !this.state.hasNextPage) {
-          this.setState({
-            ... this.state,
-             isLoading: false,
-           })
-          return;
-        }
-        // 设置isLoading为true，表示正在加载数据
-        this.setState({
-          isLoading: true,
-          pageIndex:this.state.pageIndex+1
-        }, () => {
-          this.props.loadMoreListData({ goodsListParam: { pageIndex: this.state.pageIndex } });
-        });
+    return new Promise((resolve, reject) => {
+      if (this.props.count<=this.props.productList.length) {
+        resolve(false);
       }
-      isRowLoaded({ index }) {
-        // 判断当前行是否已经加载
-        return !!this.props.productList[index];
+      this.props.loadMoreListData({ goodsListParam: { pageIndex: this.props.pageIndex+1 } });
+      this.resolveLoadMorePromise = resolve;
+      this.rejectLoadMorePromise = reject;
+      
+    })
+  }
+  
+    isRowLoaded({ index }) {
+      // 判断当前行是否已经加载
+      return !!this.props.productList[index];
 
-      }
+    }
     
   rowRenderer({ index, key,style }) {
         // 渲染每一行的内容
@@ -83,14 +73,20 @@ class ProductList extends PureComponent<Props,State>{
         );
       }
 
-      componentDidUpdate() {
+      componentDidUpdate(prevProps) {
           //刷新页面的时候更新列表项的配置
-          this.setState(
-            {
-                isLoading:false,
-                hasNextPage:this.props.productList?.length<this.props.count,
-            }
-          )
+        if (isEqual(this.props.productList, prevProps.productList)) {
+          if (this.resolveLoadMorePromise) {
+            this.resolveLoadMorePromise()
+            this.resolveLoadMorePromise=null
+          }
+        }
+        if (this.props.error != prevProps.error) {
+          if (this.props.error && this.props.error !== prevProps.error) {
+            this.rejectLoadMorePromise();
+            this.rejectLoadMorePromise=null
+          }
+        }
       }
 
     dealListData=(productListItem:productItemInterface)=>{
@@ -146,10 +142,11 @@ class ProductList extends PureComponent<Props,State>{
 }
 
 const mapStateToProps=(state)=>{
-    const {shopPageReducer:{shopPageData:{productListData:{productList=[],count=0}}}}=state;
+    const {shopPageReducer:{shopPageData:{productListData:{productList=[],count=0},productListParam:{pageIndex}}}}=state;
     return {
         productList,
-        count
+      count,
+      pageIndex
     }
 }
 const mapDispatchToProps=(dispatch)=>{

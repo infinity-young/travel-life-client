@@ -33,9 +33,6 @@ function *fetchShopListPageListData(action){
         ...listRequestParam,
         ...listParams
     }
-    console.log("====listRequestParam=====",listRequestParam)
-    console.log("===listParams======",listParams)
-    console.log("===requestParams======",requestParams)
     yield put(yield call(setShopListQueryParams,listParams))
      //请求店铺列表页筛选框数据
      const data = yield call(Request,SHOP_LIST_PAGE_LIST_PATH,requestParams);

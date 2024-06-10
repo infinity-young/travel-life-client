@@ -26,7 +26,6 @@ export class  ShopPage extends PureComponent<Props>{
     constructor(props){
         super(props)
         const { shopId } = this.props.match.params;
-        console.log("====constructor========",this.props.productList)
         this.props.initShopPage(shopId)
     }
     componentWillUnmount(){
@@ -57,7 +56,6 @@ export class  ShopPage extends PureComponent<Props>{
         const{productCategoryList}=this.props;
         const categoryList=this.dealWithProductCategoryList(productCategoryList);
         const {shopName,shopImg,shopDesc,shopAddr,phone}=shop;
-        console.log("==render========",this.props.productCategoryList)
         return(
             <div className={style.shopPageContainer} >
                 <div>
@@ -106,7 +104,7 @@ const mapStateToProps=(state)=>{
         productList,
         count,
         shop,
-        productCategoryList
+        productCategoryList,
     }
 }
 const mapDispatchToProps=(dispatch)=>{

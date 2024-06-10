@@ -16,46 +16,26 @@ import isEqual from 'lodash/isEqual';
 interface Props{
     shopList:Array<ShopItemInterface>,
     count:number,
-    loadMoreListData: (params) => void
-}
-
-interface State{
-    isLoading:boolean,
+    loadMoreListData: (params) => void,
     pageIndex:number
 }
 
-class ShopList extends PureComponent<Props, State> {
+class ShopList extends PureComponent<Props> {
   private resolveLoadMorePromise;
   private rejectLoadMorePromise;
   constructor(props) {
     super(props)
-    this.state = {
-      isLoading: false,
-      pageIndex: 1
-    }
   }
   loadMoreItems = () => {
       // 创建一个新的 Promise
       return new Promise((resolve, reject) => {
         // 检查是否已经在加载数据或没有更多数据
-        if (this.state.isLoading) {
-          resolve(false);
-        }
-        else if (!(this.props.shopList?.length<this.props.count)) {
-          this.setState(prevState => ({
-            ...prevState,
-            isLoading: false,
-          }));
+       if (!(this.props.shopList?.length<this.props.count)) {
         resolve(false);
         } else {
-        // 设置 isLoading 状态为 true
-        this.setState(prevState => ({
-          ...prevState,
-          isLoading: true
-        }));
           // 调用 store 中的 loadMoreListData 函数，并传入参数和 callback
           this.props.loadMoreListData({
-            listParams: { pageIndex: this.state.pageIndex+1 },       
+            listParams: { pageIndex: this.props.pageIndex+1 },       
           });  
           this.resolveLoadMorePromise = resolve;
           this.rejectLoadMorePromise = reject;
@@ -100,11 +80,6 @@ class ShopList extends PureComponent<Props, State> {
     );
   }
   componentDidUpdate(prevProps) {
-      // //刷新页面的时候更新列表项的配置
-      this.setState(prevState => ({
-        ...prevState,
-        isLoading:false,
-      }));
       // 如果接收到新的列表数据，则决议 Promise
       if (!isEqual(this.props.shopList, prevProps.shopList)) {
         if (this.resolveLoadMorePromise) {
@@ -174,11 +149,12 @@ class ShopList extends PureComponent<Props, State> {
 }
 
 const mapStateToProps=(state)=>{
-    const {shopListPageReducer:{shopListPageData:{listData:{shopList=[],count=0}}}}=state
+    const {shopListPageReducer:{shopListPageData:{listData:{shopList=[],count=0},listRequestParam:{pageIndex}}}}=state
 
     return {
         shopList,
-        count
+        count,
+        pageIndex
     }
 }
 const mapDispatchToProps=(dispatch)=>{
