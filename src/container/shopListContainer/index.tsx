@@ -145,7 +145,8 @@ class ShopList extends PureComponent<Props, State> {
         if(shopList===null||shopList.length==0){
             return <div/>
         }
-      const rowCount =  this.props.count+1;
+      const rowCount = this.props.count + 1;
+      const listKey=shopList[0].shopDesc
       return (
           <InfiniteLoader
             isRowLoaded={this.isRowLoaded}
@@ -164,6 +165,7 @@ class ShopList extends PureComponent<Props, State> {
                  onRowsRendered={onRowsRendered}
                  ref={registerChild}
                  className={styles.listContainer}
+                 key={listKey}
                  />
                 )}
               </AutoSizer>
