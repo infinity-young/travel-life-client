@@ -146,25 +146,28 @@ class ShopList extends PureComponent<Props, State> {
             return <div/>
         }
       const rowCount =  this.props.count+1;
-        return (
-            <InfiniteLoader
+      return (
+          <InfiniteLoader
             isRowLoaded={this.isRowLoaded}
             loadMoreRows={this.loadMoreItems}
             rowCount={rowCount}
           >
             {({ onRowsRendered, registerChild }) => (
               <AutoSizer>
-                {() => (
-                  <List
-                    height={innerHeight*0.7}
-                    width={window.innerWidth*0.96}
+                {({ width, height}) => (
+                  <div>
+                    <List
+                    height={height}
+                    width={width}
                     rowCount={rowCount}
                     rowHeight={306}
                     rowRenderer={this.rowRenderer}
                     onRowsRendered={onRowsRendered}
                     ref={registerChild}
                     className={styles.listContainer}
-                  />
+                    />
+                    <div>{ height}</div>
+                  </div>
                 )}
               </AutoSizer>
             )}
