@@ -23,9 +23,8 @@ export class GoodsDetailPage extends PureComponent<Props>{
         }
         const{productName,imgAddr,productDesc,normalPrice,promotionPrice,productImgList}=product;
         return (
-            <div>
+            <div className='common-page-container'>
                 <NavigationBar title={productName} />
-                <div className='common-page-container'>
                     <div className='title-text' >{productName}</div>
                     <div className={style.card}>
                         <div className={style.headerImage}>
@@ -60,7 +59,6 @@ export class GoodsDetailPage extends PureComponent<Props>{
                         })}
                         </div>
                     </div>
-                </div>
             </div>
         )
     }

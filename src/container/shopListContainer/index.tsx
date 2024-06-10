@@ -155,19 +155,16 @@ class ShopList extends PureComponent<Props, State> {
             {({ onRowsRendered, registerChild }) => (
               <AutoSizer>
                 {({ width, height}) => (
-                  <div>
-                    <List
-                    height={height}
-                    width={width}
-                    rowCount={rowCount}
-                    rowHeight={306}
-                    rowRenderer={this.rowRenderer}
-                    onRowsRendered={onRowsRendered}
-                    ref={registerChild}
-                    className={styles.listContainer}
-                    />
-                    <div>{ height}</div>
-                  </div>
+                 <List
+                 height={height}
+                 width={width}
+                 rowCount={rowCount}
+                 rowHeight={306}
+                 rowRenderer={this.rowRenderer}
+                 onRowsRendered={onRowsRendered}
+                 ref={registerChild}
+                 className={styles.listContainer}
+                 />
                 )}
               </AutoSizer>
             )}

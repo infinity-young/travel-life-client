@@ -8,7 +8,7 @@ import { withRouter,RouteComponentProps } from 'react-router-dom';
 import { List, AutoSizer, InfiniteLoader } from 'react-virtualized';
 import { productItemInterface } from "../../interface/productInterface.ts";
 import { getShopPageList } from "../../store/actions/shopPage.ts";
-import style from './index.module.scss'
+import styles from './index.module.scss'
 
 
 interface Props extends RouteComponentProps{
@@ -60,18 +60,20 @@ class ProductList extends PureComponent<Props,State>{
 
       }
     
-  rowRenderer({ index, key }) {
+  rowRenderer({ index, key,style }) {
         // 渲染每一行的内容
        const item = this.dealListData(this.state.listdata[index]);
        if (index === this.props.count) {
-        return (
-            <div className={style.last}  key={key}>我是有底线的^_^</div>
+         return (
+         <div key={key} style={style}>
+            <div className={styles.last}  key={key}>我是有底线的^_^</div>
+         </div>
         );
 
         }
     
         return (
-          <div key={key}>
+          <div key={key} style={style}>
            <PoiCell 
                     title={item.title} 
                     desc={item.desc} 
@@ -114,24 +116,25 @@ class ProductList extends PureComponent<Props,State>{
         if(productList===null||productList.length==0){
             return <div/>
         }
+      const rowCount=this.state.listdata.length+1
         return (
             <InfiniteLoader
             isRowLoaded={this.isRowLoaded}
             loadMoreRows={this.loadMoreItems}
-            rowCount={this.state.hasNextPage ? this.state.listdata.length + 1 : this.state.listdata.length+0}
+            rowCount={rowCount}
           >
             {({ onRowsRendered, registerChild }) => (
               <AutoSizer>
-                {() => (
+                {({height,width}) => (
                   <List
-                    height={window.innerHeight*0.7}
-                    width={window.innerWidth*0.96}
-                    rowCount={this.state.hasNextPage ? this.state.listdata.length + 1 : this.state.listdata.length+0}
-                    rowHeight={310}
+                    height={height}
+                    width={width}
+                    rowCount={rowCount}
+                    rowHeight={306}
                     rowRenderer={this.rowRenderer}
                     onRowsRendered={onRowsRendered}
                     ref={registerChild}
-                    className={style.listContainer}
+                    className={styles.listContainer}
                   />
                 )}
               </AutoSizer>
