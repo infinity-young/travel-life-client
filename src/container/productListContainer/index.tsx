@@ -111,7 +111,9 @@ class ProductList extends PureComponent<Props,State>{
     render(): ReactNode {
       const { productList = [] } = this.props;
         if(productList===null||productList.length==0){
-            return <div className={styles.noContent}>数据为空</div>
+          return <div  className={styles.noContentContainer}>
+              <div className={styles.noContent}>数据为空</div>
+            </div>
         }
       const rowCount = this.props.count + 1
       const listKey = JSON.stringify(productList);
@@ -123,9 +125,9 @@ class ProductList extends PureComponent<Props,State>{
           >
             {({ onRowsRendered, registerChild }) => (
               <AutoSizer>
-                {({height,width}) => (
+                {({width}) => (
                   <List
-                    height={height}
+                    height={innerHeight*0.7}
                     width={width}
                     rowCount={rowCount}
                     rowHeight={306}
@@ -133,6 +135,7 @@ class ProductList extends PureComponent<Props,State>{
                     onRowsRendered={onRowsRendered}
                     ref={registerChild}
                     key={listKey}
+                    className={styles.listContainer}
                   />
                 )}
               </AutoSizer>

@@ -1,4 +1,6 @@
-
+.listContainer{
+    background-color: rgba(240, 248, 255, 0.896);
+}
 .last{
     display: flex;
     justify-content: center;
@@ -7,6 +9,11 @@
     margin-top: 6px;
     margin-bottom: 6px;
     color: #fba8a8;
+}
+.noContentContainer{
+    display: flex;
+    flex:1;
+    background-color: rgba(240, 248, 255, 0.896);
 }
 .noContent{
     display: flex;

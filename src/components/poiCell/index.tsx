@@ -12,7 +12,8 @@ render(): ReactNode {
     return (
         <div className={style.card}>
             <img
-            src={img}
+                src={img}
+                className={style.img}
             />
             <div className={style.contentContainer}>
                 <div className={style.title}>{title}</div>

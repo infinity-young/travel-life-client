@@ -64,7 +64,7 @@ export class  ShopPage extends PureComponent<Props>{
                     <NavigationBar />
                     <div className='title-text'>{shopName}</div>
                     <div className={style.card}>
-                        <img src={IMAGE_PATH+shopImg}/>
+                        <img src={IMAGE_PATH + shopImg} className={style.img} />
                         <div className={style.titleContentContainer}>
                             <div className={style.itemContainer}>
                                 <div className={style.title}>店铺类型</div>
