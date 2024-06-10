@@ -9,11 +9,10 @@ export default class ShopItem extends PureComponent<ShopCategoryItemInterface>{
         super(props)
     }
     render(): ReactNode {
-        const {shopCategoryName,shopCategoryDesc,shopCategoryImg,shopCategoryId}=this.props;
+        const {shopCategoryDesc,shopCategoryImg}=this.props;
         return(
         <div className={styles.itemContainer}>
             <div className={styles.textContainer}>
-                <span>{shopCategoryName}</span>
                 <span>{shopCategoryDesc}</span>
             </div>
             <img
