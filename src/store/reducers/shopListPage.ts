@@ -7,7 +7,11 @@ const defaultStates = {
     listData:{},
     listRequestParam:{
         pageIndex:1,
-        pageSize:3,
+        pageSize: 3,
+        areaId: -1,
+        shopCategoryId: -1,
+        parentId: -1,
+        shopName:null
     }
    }
 };

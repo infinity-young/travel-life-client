@@ -47,7 +47,7 @@ export  class ShopListPage extends PureComponent<RouteProps&Props>{
         return categoryList
     }
     onClickCategory=(categoryId:number)=>{
-        this.props.refreshList({listParams:{parentId:categoryId,pageIndex:1}})
+        this.props.refreshList({listParams:{shopCategoryId:categoryId,pageIndex:1}})
     }
     onSelectCity=(areaId:number)=>{
         this.props.refreshList({listParams:{areaId:areaId,pageIndex:1}})
