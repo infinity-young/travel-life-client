@@ -12,6 +12,7 @@ import ProductList from '../../container/productListContainer/index.tsx'
 import NavigationBar from "../../components/navigationBar/index.tsx";
 import { IMAGE_PATH } from "../../config/imageConfig.ts";
 import style from './index.module.scss'
+import Progress from '../../components/progress/index.tsx';
 
 interface Props{
     initShopPage:(shopId:number)=>void;
@@ -64,6 +65,13 @@ export class  ShopPage extends PureComponent<Props>{
                     <div className={style.card}>
                         <img src={IMAGE_PATH + shopImg} className={style.img} />
                         <div className={style.titleContentContainer}>
+                            <div className={style.itemContainer}>
+                            <div className={style.title}>店铺评分</div>
+                                <div className={style.progressContainer}>
+                                    <Progress percent={0.9} radius={24} borderWidth={6} className={ style.canvas} />
+                                    <div className={style.progressText}>4.5</div>
+                                </div>
+                            </div>
                             <div className={style.itemContainer}>
                                 <div className={style.title}>店铺类型</div>
                                 <div className={style.value}>{shopDesc}</div>
