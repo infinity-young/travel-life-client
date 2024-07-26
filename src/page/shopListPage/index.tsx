@@ -47,7 +47,13 @@ export  class ShopListPage extends PureComponent<RouteProps&Props>{
         return categoryList
     }
     onClickCategory=(categoryId:number)=>{
-        this.props.refreshList({listParams:{shopCategoryId:categoryId,pageIndex:1}})
+        const {shopCategoryList=[]}=this.props;
+        const item=shopCategoryList.find((item)=>item.shopCategoryId===categoryId);
+        if(item.parent){
+            this.props.refreshList({listParams:{shopCategoryId:categoryId,pageIndex:1}})
+        }else{
+            this.props.refreshList({listParams:{parentId:categoryId,pageIndex:1}})
+        }
     }
     onSelectCity=(areaId:number)=>{
         this.props.refreshList({listParams:{areaId:areaId,pageIndex:1}})
