@@ -10,8 +10,6 @@ RUN npm install
 COPY . .
 # 构建生产环境代码
 RUN npm run build
-# 检查构建目录是否存在
-RUN ls -al /app
 # 暴露容器的 4000 端口
 EXPOSE 4000
 # 使用 Nginx 作为基础镜像
